@@ -1,0 +1,52 @@
+.card7{
+    background-color: #ffff66;
+}
+
+.card1{
+    background-color: 	#ffff99;
+}
+
+.card4{
+    background-color: 	#fce198;
+}
+
+.card{
+    background-color: 	#fcdb7e;
+}
+
+
+.title{
+    color: #006400;
+    font-weight: bold;
+}
+
+.title2{
+    color: #805500;
+    font-weight: bold;
+}
+
+ion-card:hover { 
+    background-color: saturation($color: #ffff99);
+}
+
+ion-card-subtitle{
+    font-size: x-small;
+}
+
+ion-card-content{
+    font-size: small;
+    line-height: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-height: 16px;
+    max-height: 200px;
+    -webkit-box-orient: vertical;
+}
+
+ion-card{
+    width: 90%;
+    margin: auto;
+    margin-top: 4px;
+}
