@@ -22,6 +22,11 @@
   <app-root></app-root>
   <ion-header class="header">
     <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="account()">
+          <ion-icon slot="start" name="contact" size=large></ion-icon>
+        </button>
+        </ion-button>
       <ion-title>AvocadoPlan</ion-title>
       <ion-buttons slot="end">
         <ion-button (click)="search()">
