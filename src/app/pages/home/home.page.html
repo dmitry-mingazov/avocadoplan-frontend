@@ -1,8 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      AvocadoPlan
-    </ion-title>
+    <ion-title>AvocadoPlan</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="search()"> <!--TODO: da definire-->
+        <ion-icon slot="end" name="search" size=large></ion-icon>
+        </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -53,7 +56,7 @@
     </ion-card-content>
   </ion-card>
 
-   <ion-card class="card4">
+  <ion-card class="card4">
     <ion-card-header>
       <ion-card-subtitle>Autore2</ion-card-subtitle>
       <ion-card-title class="title2">Olivia</ion-card-title>
