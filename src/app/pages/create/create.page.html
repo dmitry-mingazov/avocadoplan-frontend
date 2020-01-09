@@ -1,48 +1,63 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-button slot="start" href="/app/tabs/home">
-      <ion-icon name="close-circle-outline" size=small></ion-icon>
-    </ion-button>
-    <ion-title>Create plan</ion-title>
+  <ion-toolbar class="head">
+    <a href="/app/tabs/home" slot="start" class="close">
+      <ion-icon name="close-circle-outline"></ion-icon>
+    </a>
+    <ion-title size="small">Create plan</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-card class="card">
-  <ion-item>
-    <ion-label position="floating">Titolo</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Descrizione piano</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Bevande consigliate</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
-</ion-card>
+  <ion-card class="generality">
+    <ion-item>
+      <ion-label position="floating">Title</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Plan description</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Drinks</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+  </ion-card>
 
-  <ion-card class="card">
+  <ion-card class="action">
+    <ion-item (click)="addDay()">
+      <ion-icon name="add-circle-outline" size=medium></ion-icon>
+    </ion-item>
+    <ion-item (click)="confirm()">
+      <ion-icon name="checkmark-circle-outline" size=medium></ion-icon>
+    </ion-item>
+  </ion-card>
+
+  <ion-card class="day">
     <ion-card-header>
       <ion-card-subtitle>Week1</ion-card-subtitle>
       <ion-card-title>Day1</ion-card-title>
     </ion-card-header>
     <ion-card-content>
+
+      <ion-item class="meal">
+        <ion-select placeholder="Type of meal">
+          <ion-select-option value="b">Breakfast</ion-select-option>
+          <ion-select-option value="l">Lunch</ion-select-option>
+          <ion-select-option value="d">Dinner</ion-select-option>
+          <ion-select-option value="s">Snaks</ion-select-option>
+        </ion-select>
+      </ion-item>
+
       <ion-item>
-        <ion-label position="floating">Pasto</ion-label>
+        <ion-label position="floating">Title</ion-label>
         <ion-input></ion-input>
       </ion-item>
       <ion-item>
-      <ion-label position="floating">Ingredienti</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
     </ion-card-content>
   </ion-card>
-  
-<ion-button class="confirm" (click)="confirm()">
-  <ion-icon name="checkmark-circle-outline" size=medium></ion-icon>
-</ion-button>
 
 </ion-content>

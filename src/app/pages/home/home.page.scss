@@ -1,23 +1,30 @@
+.head{
+    max-height: 50px;
+}
+
 .card{
     background-color: 	#fce198;
-    max-height: 30%;
+    max-height: 120px;
     ion-card-title{
-        color: #006400;
+        color: #264d00;
         font-weight: bold;
-        overflow: scroll;
+        font-size: medium;
+
+        overflow: hidden;
         text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
+        white-space: nowrap;
+        line-height: 13px;
     }
     ion-card-content{
-    font-size: small;
+    font-size: x-small;
+
     overflow: scroll;
-    text-overflow: ellipsis;
+    text-overflow: clip;
+    line-height: 15px;
+    max-height: 40px;
+    
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    line-height: 16px;
-    max-height: 200px;
     -webkit-box-orient: vertical;
     :hover{
         background-color: saturation($color: #fce198);
@@ -26,7 +33,7 @@
 }
 
 .author{
-    color: #006400;
+    color: #264d00;
     font-size: small;
     float: right;
     size: small;
@@ -34,4 +41,16 @@
 
 .badge{
     font-size: x-small;
+    background-color: #264d00;
+    margin-left: 15px;
+}
+
+.date{
+    float: right;
+    margin-right: 12px;
+}
+
+.foot{
+   width: 300px;
+   max-height: 20px;
 }
