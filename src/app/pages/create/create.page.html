@@ -1,76 +1,48 @@
 <ion-header>
   <ion-toolbar>
+    <ion-button slot="start" href="/app/tabs/home">
+      <ion-icon name="close-circle-outline" size=small></ion-icon>
+    </ion-button>
     <ion-title>Create plan</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-<ion-item>
-  <ion-label position="floating">Titolo</ion-label>
-  <ion-input></ion-input>
-</ion-item>
-<ion-item>
-  <ion-label position="floating">Descrizione piano</ion-label>
-  <ion-input></ion-input>
-</ion-item>
-<ion-item>
-  <ion-label position="floating">Bevande consigliate</ion-label>
-  <ion-input></ion-input>
-</ion-item>
+  <ion-card class="card">
+  <ion-item>
+    <ion-label position="floating">Titolo</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Descrizione piano</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Bevande consigliate</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+</ion-card>
 
-<ion-grid>
-  <ion-row>
-    <ion-col>
-      <ion-buttons>
-        <ion-button (click)="aa">1
-          <ion-icon name="calendar" size=small></ion-icon>
-          </ion-button>
-        </ion-buttons>
-    </ion-col>
-    <ion-col>
-      <ion-buttons>
-        <ion-button (click)="aa">2
-          <ion-icon name="calendar" size=small></ion-icon>
-          </ion-button>
-        </ion-buttons>
-    </ion-col>
-    <ion-col>
-      <ion-buttons>
-        <ion-button (click)="aa">3
-          <ion-icon name="calendar" size=small></ion-icon>
-          </ion-button>
-        </ion-buttons>
-    </ion-col>
-    <ion-col>
-      <ion-buttons>
-        <ion-button (click)="aa">4
-          <ion-icon name="calendar" size=small></ion-icon>
-          </ion-button>
-        </ion-buttons>
-    </ion-col>
-    <ion-col>
-      <ion-buttons>
-        <ion-button (click)="aa">5
-          <ion-icon name="calendar" size=small></ion-icon>
-          </ion-button>
-        </ion-buttons>
-    </ion-col>
-    <ion-col>
-      <ion-buttons>
-        <ion-button (click)="aa">6
-          <ion-icon name="calendar" size=small></ion-icon>
-          </ion-button>
-        </ion-buttons>
-    </ion-col>
-    <ion-col>
-      <ion-buttons>
-        <ion-button (click)="aa">7
-          <ion-icon name="calendar" size=small></ion-icon>
-          </ion-button>
-        </ion-buttons>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+  <ion-card class="card">
+    <ion-card-header>
+      <ion-card-subtitle>Week1</ion-card-subtitle>
+      <ion-card-title>Day1</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Pasto</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+      <ion-item>
+      <ion-label position="floating">Ingredienti</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    </ion-card-content>
+  </ion-card>
+  
+<ion-button class="confirm" (click)="confirm()">
+  <ion-icon name="checkmark-circle-outline" size=medium></ion-icon>
+</ion-button>
 
 </ion-content>
