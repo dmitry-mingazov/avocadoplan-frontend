@@ -1,73 +1,63 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      AvocadoPlan
-    </ion-title>
+  <ion-toolbar class="head">
+    <ion-title>AvocadoPlan</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="search()">
+        <ion-icon name="search" size=medium></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-searchbar show-cancel-button="focus"></ion-searchbar>
-
-  <ion-card class="card4" href="">
+ <ion-card class="card" href="/app/tabs/plan">
     <ion-card-header>
-      <ion-card-subtitle>Autore1</ion-card-subtitle>
-      <ion-card-title class="title">BraccioDiFerro</ion-card-title>
+      <ion-card-title class="title">
+        BraccioDiFerrojkscdbsabvhlbeaòkvbòajvbòkajbvòowehòuiwabeòvjkbaeòkjbc
+        <a href="" class="author">@Autore1</a>
+      </ion-card-title>
     </ion-card-header>
     <ion-card-content>
+      Questo piano alimentare conferisce poteri sovrannaturali a chi lo segue,
       Questo piano alimentare conferisce poteri sovrannaturali a chi lo segue.
     </ion-card-content>
+
+    <ion-footer class="foot">
+      <ion-badge class="badge" (click)="addLike()">
+        <ion-icon name="arrow-round-up"></ion-icon>
+        123
+      </ion-badge>
+      <ion-badge class="badge" (click)="addUnlike()">
+        <ion-icon name="arrow-round-down"></ion-icon>
+        456
+      </ion-badge>
+      <ion-label class="date">09 Jan 2020</ion-label>
+    </ion-footer>
   </ion-card>
 
 
-  <ion-card class="card4">
+  <ion-card class="card" href="">
     <ion-card-header>
-      <ion-card-subtitle>Autore2</ion-card-subtitle>
-      <ion-card-title class="title2">Olivia</ion-card-title>
+      <ion-card-title class="title2">
+        Olivia
+        <a href="" class="author">@Autore2</a>
+      </ion-card-title>
     </ion-card-header>
     <ion-card-content>
       Questo piano alimentare dona una forma fisica snella e slanciata a chi lo segue.
     </ion-card-content>
+
+    <ion-footer class="foot">
+      <ion-badge class="badge" (click)="addLike()">
+        <ion-icon name="arrow-round-up"></ion-icon>
+        123
+      </ion-badge>
+      <ion-badge class="badge" (click)="addUnlike()">
+        <ion-icon name="arrow-round-down"></ion-icon>
+        456
+      </ion-badge>
+      <ion-label class="date">09 Jan 2020</ion-label>
+    </ion-footer>
   </ion-card>
-
-
-  <ion-card class="card4">
-    <ion-card-header>
-      <ion-card-subtitle>Autore1</ion-card-subtitle>
-      <ion-card-title class="title">BraccioDiFerro</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      Questo piano alimentare conferisce poteri sovrannaturali a chi lo segue.
-    </ion-card-content>
-  </ion-card>
-
-
-  <ion-card class="card4">
-    <ion-card-header>
-      <ion-card-subtitle>Autore2</ion-card-subtitle>
-      <ion-card-title class="title2">Olivia</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      Questo piano alimentare dona una forma fisica snella e slanciata a chi lo segue.
-    </ion-card-content>
-  </ion-card>
-
-   <ion-card class="card4">
-    <ion-card-header>
-      <ion-card-subtitle>Autore2</ion-card-subtitle>
-      <ion-card-title class="title2">Olivia</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      Questo piano alimentare dona una forma fisica snella e slanciata a chi lo segue.
-    </ion-card-content>
-  </ion-card>
-
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 
 </ion-content>

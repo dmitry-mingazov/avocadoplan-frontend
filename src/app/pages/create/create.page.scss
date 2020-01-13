@@ -1,0 +1,60 @@
+.head{
+    max-height: 35px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+.close{
+    color: #264d00;
+}
+
+.generality{
+    ion-item{
+        max-height: 45px;
+    }
+    background-color:#fce198;
+    max-height: 180px;
+    font-size: x-small;
+}
+
+.day{
+    ion-card-header{
+        max-height: 55px;
+    }
+    ion-card-title{
+        color: #264d00;
+        font-weight: bold;
+        font-size: medium;
+    }
+    ion-card-subtitle{
+        font-size: x-small;
+    }
+    ion-item{
+        max-height: 50px;
+    }
+    max-width: 240px;
+    max-height: 220px;
+    background-color:#fce198;
+    font-size: x-small;
+}
+
+.meal{
+    max-width: 200px;
+    background-color: #fce198;
+    font-size: small;
+    ion-select{
+        max-width: 200px;
+        max-height: 38px;
+    }
+}
+
+.action{
+    max-height: 120px;
+    max-width: 55px;
+    margin-top: 52px;
+    color: #264d00;
+    float: right;
+    :hover{
+        background-color: saturation($color: #fce198);
+    }
+}

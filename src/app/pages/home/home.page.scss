@@ -1,52 +1,56 @@
-.card7{
-    background-color: #ffff66;
-}
-
-.card1{
-    background-color: 	#ffff99;
-}
-
-.card4{
-    background-color: 	#fce198;
+.head{
+    max-height: 50px;
 }
 
 .card{
-    background-color: 	#fcdb7e;
-}
+    background-color: 	#fce198;
+    max-height: 120px;
+    ion-card-title{
+        color: #264d00;
+        font-weight: bold;
+        font-size: medium;
 
-
-.title{
-    color: #006400;
-    font-weight: bold;
-}
-
-.title2{
-    color: #805500;
-    font-weight: bold;
-}
-
-ion-card:hover { 
-    background-color: saturation($color: #ffff99);
-}
-
-ion-card-subtitle{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 13px;
+    }
+    ion-card-content{
     font-size: x-small;
-}
 
-ion-card-content{
-    font-size: small;
-    line-height: normal;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow: scroll;
+    text-overflow: clip;
+    line-height: 15px;
+    max-height: 40px;
+    
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    line-height: 16px;
-    max-height: 200px;
     -webkit-box-orient: vertical;
+    :hover{
+        background-color: saturation($color: #fce198);
+    }
+}
 }
 
-ion-card{
-    width: 90%;
-    margin: auto;
-    border-bottom: 3px solid #264d00;
+.author{
+    color: #264d00;
+    font-size: small;
+    float: right;
+    size: small;
+}
+
+.badge{
+    font-size: x-small;
+    background-color: #264d00;
+    margin-left: 15px;
+}
+
+.date{
+    float: right;
+    margin-right: 12px;
+}
+
+.foot{
+   width: 300px;
+   max-height: 20px;
 }

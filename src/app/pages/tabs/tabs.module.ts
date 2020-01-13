@@ -8,10 +8,12 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
 import { HomePageModule } from '../home/home.module';
+import { CreatePageModule } from '../create/create.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    CreatePageModule,
     FormsModule,
     HomePageModule,
     IonicModule,
