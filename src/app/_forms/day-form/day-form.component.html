@@ -1,0 +1,18 @@
+<form [formGroup]="dayForm" *ngIf="dayForm">
+  <ion-card class="day">
+    <ion-item>
+      <ion-input type="text" formControlName="weekDay" placeholder="Giorno della settimana"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" formControlName="week" placeholder="Settimana n*"></ion-input>
+  </ion-item>
+<!--
+    <ul>
+      <li *ngFor="let meal of meals">
+        <app-meal-form [mealForm]="meal"></app-meal-form>
+      </li>
+    </ul>
+  -->
+  
+  </ion-card>
+</form>

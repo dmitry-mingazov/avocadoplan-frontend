@@ -1,4 +1,4 @@
-import { MealType } from '../enums/meal-type.enum';
+import { MealType } from '../_enums/meal-type.enum';
 import { Dish } from './dish.interface';
 
 export interface Meal {

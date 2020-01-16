@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Plan } from '../interfaces/plan.interface';
+import { Plan } from '../_interfaces/plan.interface';
 import { API_URL } from '../config';
 
 @Injectable({

@@ -1,5 +1,4 @@
 import { User } from './user.interface';
-import { Tag } from './tag.interface';
 import { Day } from './day.interface';
 
 export interface Plan {
@@ -7,10 +6,10 @@ export interface Plan {
     descritpion: string;
     drinkDescription: string;
     owner: User;
-    createdAt: Date;
-    lastModifiedAt: Date;
-    tags: Tag[];
-    upvotes: number;
-    downvotes: number;
+    // createdAt: Date;
+    // lastModifiedAt: Date;
+    tags: string[];
+    // upvotes: number;
+    // downvotes: number;
     days: Day[];
 }

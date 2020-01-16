@@ -6,58 +6,78 @@
     <ion-title size="small">Create plan</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-
-  <ion-card class="generality">
-    <ion-item>
-      <ion-label position="floating">Title</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Plan description</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Drinks</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-  </ion-card>
-
-  <ion-card class="action">
-    <ion-item (click)="addDay()">
-      <ion-icon name="add-circle-outline" size=medium></ion-icon>
-    </ion-item>
-    <ion-item (click)="confirm()">
-      <ion-icon name="checkmark-circle-outline" size=medium></ion-icon>
-    </ion-item>
-  </ion-card>
-
-  <ion-card class="day">
-    <ion-card-header>
-      <ion-card-subtitle>Week1</ion-card-subtitle>
-      <ion-card-title>Day1</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-
-      <ion-item class="meal">
-        <ion-select placeholder="Type of meal">
-          <ion-select-option value="b">Breakfast</ion-select-option>
-          <ion-select-option value="l">Lunch</ion-select-option>
-          <ion-select-option value="d">Dinner</ion-select-option>
-          <ion-select-option value="s">Snaks</ion-select-option>
-        </ion-select>
-      </ion-item>
-
+  <!--
+  <form [formGroup]="createForm" (ngSubmit)="createPlan()"> 
       <ion-item>
         <ion-label position="floating">Title</ion-label>
-        <ion-input></ion-input>
+        <ion-input type="text" formControlName="plan_title"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Description</ion-label>
-        <ion-input></ion-input>
+        <ion-label position="floating">Plan description</ion-label>
+        <ion-textarea formControlName="plan_description"></ion-textarea>
       </ion-item>
-    </ion-card-content>
-  </ion-card>
+  </form> -->
+  <form [formGroup]="planForm" (ngSubmit)="createPlan()">
+
+    <ion-card class="generality">
+      <ion-item>
+        <ion-label position="floating">Title</ion-label>
+        <ion-input type="text" formControlName="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Plan description</ion-label>
+        <ion-textarea formControlName="description"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Drinks</ion-label>
+        <ion-textarea formControlName="drinkDescription"></ion-textarea>
+      </ion-item>
+    </ion-card>
+
+    <ion-card class="action">
+      <ion-item (click)="addDay()">
+        <ion-icon name="add-circle-outline" size=medium></ion-icon>
+      </ion-item>
+      <ion-item (click)="confirm()">
+        <ion-icon name="checkmark-circle-outline" size=medium></ion-icon>
+      </ion-item>
+    </ion-card>
+
+    <ion-item *ngFor="let day of days?.controls; let i = index">
+      <app-day-form [index]="i" [dayForm]="day"></app-day-form>
+    </ion-item>
+
+    <!--
+    <ion-card class="day">
+      <ion-card-header>
+        <ion-card-subtitle>Week1</ion-card-subtitle>
+        <ion-card-title>Day1</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+
+        <ion-item class="meal">
+          <ion-select formControlName="meal_type" placeholder="Type of meal">
+            <ion-select-option value="b">Breakfast</ion-select-option>
+            <ion-select-option value="l">Lunch</ion-select-option>
+            <ion-select-option value="d">Dinner</ion-select-option>
+            <ion-select-option value="s">Snacks</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Title</ion-label>
+          <ion-input type="text" formControlName="meal_title"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Description</ion-label>
+          <ion-textarea formControlName="meal_description"></ion-textarea>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <button type="submit">Submit</button>
+  -->
+  </form>
 
 </ion-content>
+
