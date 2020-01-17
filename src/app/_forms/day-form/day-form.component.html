@@ -6,13 +6,14 @@
     <ion-item>
       <ion-input type="number" formControlName="week" placeholder="Settimana n*"></ion-input>
   </ion-item>
-<!--
+  <ion-item (click)="addMeal()">
+    <ion-icon name="add-circle-outline" size=medium></ion-icon>
+  </ion-item>
     <ul>
-      <li *ngFor="let meal of meals">
-        <app-meal-form [mealForm]="meal"></app-meal-form>
+      <li *ngFor="let meal of meals?.controls; let i = index">
+        <app-meal-form [mealForm]="meal" [index]="i"></app-meal-form>
       </li>
     </ul>
-  -->
   
   </ion-card>
 </form>

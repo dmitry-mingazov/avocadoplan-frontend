@@ -1,6 +1,6 @@
 export enum MealType {
-    breakfast,
-    lunch,
-    dinner,
-    snack
+    breakfast = "Colazione",
+    lunch = "Pranzo",
+    dinner = "Cena",
+    snack = "Spuntino"
 }

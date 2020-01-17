@@ -32,7 +32,7 @@ export class PlanFormService{
     // TODO increment defaultWeek and defaultWeekDay
     currentDays.push(
       this.formBuilder.group(
-        new DayForm({week: this.defaultWeek, weekDay: this.defaultWeekDay, meals: null})
+        new DayForm({week: this.defaultWeek, weekDay: this.defaultWeekDay++, meals: null})
       )
     );
 

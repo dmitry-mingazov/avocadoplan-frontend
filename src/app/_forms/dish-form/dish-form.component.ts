@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { DishForm } from 'src/app/_models/dish-form';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-dish-form',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dish-form.component.scss'],
 })
 export class DishFormComponent implements OnInit {
+  @Input() dishForm: DishForm;
+  @Input() index: number;
 
   constructor() { }
 

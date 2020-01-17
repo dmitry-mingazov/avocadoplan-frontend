@@ -1,3 +1,8 @@
-<p>
-  dish-form works!
-</p>
+<form [formGroup]="dishForm">
+  <ion-item>
+    <ion-input type="text" formControlName="name" placeholder="Nome Pasto"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="text" formControlName="description" placeholder="Descrizione Pasto"></ion-input>
+  </ion-item>
+</form>
