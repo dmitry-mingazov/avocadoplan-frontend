@@ -5,7 +5,6 @@ export class DayForm {
     weekDay = new FormControl();
     week = new FormControl();
     meals = new FormArray([]);
-    formBuilder = new FormBuilder();
 
     constructor(day: Day) {
         if(day == null || day == undefined)
@@ -16,10 +15,12 @@ export class DayForm {
         this.week.setValue(day.week);
         this.week.setValidators([Validators.required]);
 
+        /*
         if(day.meals != null && day.meals != undefined){
             day.meals.forEach( meal => {
                 this.meals.push(this.formBuilder.group(meal))
             })
         }
+        */
     }
 }
