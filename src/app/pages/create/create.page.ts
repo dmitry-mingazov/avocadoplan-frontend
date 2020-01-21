@@ -12,7 +12,7 @@ export class CreatePage implements OnInit {
 
   async confirm() {
     const alert = await this.alertController.create({
-      header: 'Confrim',
+      header: 'Confirm',
       message: 'Do you want to confirm?',
       buttons: ['cancel', 'OK']
     });

@@ -1,9 +1,11 @@
 <ion-header>
   <ion-toolbar class="head">
-    <a href="/app/tabs/home" slot="start" class="close">
-      <ion-icon name="close-circle-outline"></ion-icon>
-    </a>
-    <ion-title size="small">Create plan</ion-title>
+    <ion-buttons slot="start">
+      <ion-button click="close()">
+        <ion-icon name="close" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Create plan</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -24,15 +26,6 @@
     </ion-item>
   </ion-card>
 
-  <ion-card class="action">
-    <ion-item (click)="addDay()">
-      <ion-icon name="add-circle-outline" size=medium></ion-icon>
-    </ion-item>
-    <ion-item (click)="confirm()">
-      <ion-icon name="checkmark-circle-outline" size=medium></ion-icon>
-    </ion-item>
-  </ion-card>
-
   <ion-card class="day">
     <ion-card-header>
       <ion-card-subtitle>Week1</ion-card-subtitle>
@@ -40,24 +33,36 @@
     </ion-card-header>
     <ion-card-content>
 
-      <ion-item class="meal">
-        <ion-select placeholder="Type of meal">
-          <ion-select-option value="b">Breakfast</ion-select-option>
-          <ion-select-option value="l">Lunch</ion-select-option>
-          <ion-select-option value="d">Dinner</ion-select-option>
-          <ion-select-option value="s">Snaks</ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Title</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Description</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
+      <ion-buttons>
+        <ion-button>
+          <ion-icon name="cafe"></ion-icon>Breakfast
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons>
+        <ion-button>
+          <ion-icon name="restaurant"></ion-icon>Lunch
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons>
+        <ion-button>
+          <ion-icon name="restaurant"></ion-icon>Dinner
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons>
+        <ion-button>
+          <ion-icon name="pizza"></ion-icon>Snacks
+        </ion-button>
+      </ion-buttons>
     </ion-card-content>
+  </ion-card>
+
+  <ion-card class="action">
+    <ion-item (click)="addDay()">
+      <ion-icon name="add-circle-outline" size=medium></ion-icon>
+    </ion-item>
+    <ion-item (click)="confirm()">
+      <ion-icon name="checkmark-circle-outline" size=medium></ion-icon>
+    </ion-item>
   </ion-card>
 
 </ion-content>
