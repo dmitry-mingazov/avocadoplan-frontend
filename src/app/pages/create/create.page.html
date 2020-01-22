@@ -57,7 +57,7 @@
               <ion-input type="number" formControlName="week" placeholder=" n°" slot="end">Week: </ion-input>
             </ion-item>
 
-<!--
+            <!--
             <ion-buttons>
               <ion-button>
                 <ion-icon name="cafe"></ion-icon>Breakfast
@@ -84,12 +84,13 @@
             <div formArrayName="meals">
               <div *ngFor="let meal of day.get('meals').controls; let j = index">
                 <div [formGroupName]="j">
-                  <ion-buttons>
-                    <ion-button (click)="showMealOverlay(i, j)">
+                  <ion-item>
+                    <ion-button (click)="showMealOverlay(i, j)" class="showMeal" color="warning-contrast">
                       <ion-icon name="restaurant"></ion-icon>{{meal.get('type').value}}
                     </ion-button>
-                    <ion-button (click)="deleteMeal(day.controls.meals, i, j)">Delete</ion-button>
-                  </ion-buttons>
+                    <ion-button (click)="deleteMeal(day.controls.meals, i, j)" slot="end" color="danger"><ion-icon name="trash"></ion-icon>Delete
+                    </ion-button>
+                  </ion-item>
 
                   <!-- START OF MEAL OVERLAY -->
                   <div class="mealOverlay" [hidden]="overlayHidden[i][j]">
