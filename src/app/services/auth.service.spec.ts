@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MealFormService } from './meal-form.service';
+import { AuthService } from './auth.service';
 
-describe('MealFormService', () => {
+describe('AuthService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: MealFormService = TestBed.get(MealFormService);
+    const service: AuthService = TestBed.get(AuthService);
     expect(service).toBeTruthy();
   });
 });

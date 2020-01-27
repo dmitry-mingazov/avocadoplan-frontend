@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { PlanService } from 'src/app/services/plan.service';
-import { PlanFormService } from 'src/app/services/plan-form.service';
 import { Subscription } from 'rxjs';
 import { PlanForm } from 'src/app/_models/plan-form';
 import { DayForm } from 'src/app/_models/day-form';

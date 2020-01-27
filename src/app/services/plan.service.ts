@@ -9,12 +9,12 @@ import { API_URL } from '../config';
 })
 export class PlanService {
 
-  url = API_URL;
+  private url = API_URL;
 
   constructor(private http: HttpClient) {}
 
   public getHome(): Observable<any>{ 
-    return this.http.get(this.url);
+    return this.http.get<Plan[]>(this.url);
   }
 
   public createPlan(plan: Plan){
