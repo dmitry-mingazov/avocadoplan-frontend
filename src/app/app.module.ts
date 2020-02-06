@@ -11,7 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EnumToArrayPipe } from './_pipes/enum-to-array.pipe';
+import { AuthService } from './services/auth.service';
+import { IonicStorageModule } from '@ionic/storage';
+import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,8 +24,11 @@ import { EnumToArrayPipe } from './_pipes/enum-to-array.pipe';
       AppRoutingModule, 
       HttpClientModule, 
       FormsModule, 
-      ReactiveFormsModule],
+      ReactiveFormsModule,
+      IonicStorageModule.forRoot()],
   providers: [
+    AuthService,
+    SafariViewController,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

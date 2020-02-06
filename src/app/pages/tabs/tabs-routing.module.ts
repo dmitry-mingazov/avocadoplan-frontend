@@ -37,6 +37,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'user',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../user/user.module').then(m => m.UserPageModule),
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/app/tabs/home',
         pathMatch: 'full'
