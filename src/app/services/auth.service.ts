@@ -34,6 +34,7 @@ export class AuthService {
   login() {
     this.loading = true;
     const options = {
+      audience: 'http://localhost:3000',
       scope: 'openid profile offline_access'
     };
     // Authorize login request with Auth0: open login page and get auth results
@@ -42,6 +43,7 @@ export class AuthService {
         this.zone.run(() => this.loading = false);
         throw err;
       }
+      console.log(authResult);
       console.log(authResult.accessToken);
       // Set access token
       this.storage.set('access_token', authResult.accessToken);
@@ -57,6 +59,7 @@ export class AuthService {
         if (err) {
           throw err;
         }
+        console.log(profile);
         this.storage.set('profile', profile).then(val =>
           this.zone.run(() => this.user = profile)
         );

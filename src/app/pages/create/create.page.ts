@@ -8,6 +8,7 @@ import { DayForm } from 'src/app/_models/day-form';
 import { MealForm } from 'src/app/_models/meal-form';
 import { MealType } from 'src/app/_enums/meal-type.enum';
 import { DishForm } from 'src/app/_models/dish-form';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-create',
@@ -24,6 +25,8 @@ export class CreatePage implements OnInit {
   constructor(
     private alertController: AlertController,
     private fb: FormBuilder,
+    private planService: PlanService,
+    private auth: AuthService
     ) {
       this.planForm = this.fb.group(new PlanForm());
       this.overlayHidden = new Array(); 
@@ -38,10 +41,13 @@ export class CreatePage implements OnInit {
       buttons: ['cancel', 'OK']
     });
     await alert.present();
-
+    this.createPlan();
   }
 
-  createPlan(){}
+  createPlan(){
+    this.planForm.controls.owner.setValue(this.auth.user.sub);
+    this.planService.createPlan(this.planForm.value);
+  }
 
   addDay(){
     let control = <FormArray>this.planForm.controls.days;
