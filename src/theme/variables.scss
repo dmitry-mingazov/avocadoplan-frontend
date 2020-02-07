@@ -3,6 +3,12 @@
 
 /** Ionic CSS Variables **/
 :root {
+  --avocado-color-primary: #264d00;
+  --avocado-color-primary-contrast: #fce198;
+
+  --avocado-color-secondary: #d3b152;
+  --avocado-color-secondary-contrast: #000000;
+
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -78,9 +84,9 @@
 
 
 ion-content {
-  --ion-background-color:  #264d00;
+  --ion-background-color:  #fce198;
 }
 
 ion-item{
-  --ion-background-color:#fce198;
+  --ion-background-color: var(--avocado-color-secondary);
 }

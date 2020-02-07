@@ -1,7 +1,7 @@
 .card{
-    background-color: 	#fce198;
+    background-color: var(--avocado-color-secondary);
     ion-card-title{
-        color: #264d00;
+        color: var(--avocado-color-primary);
         font-weight: bold;
         font-size: small;
         overflow: hidden;
