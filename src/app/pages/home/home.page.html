@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar class="head">
+  <ion-toolbar class="head" color="primary">
     <ion-title>AvocadoPlan</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="search()">
@@ -10,31 +10,40 @@
 </ion-header>
 
 <ion-content>
-  <p *ngIf="loading" class="ion-text-center">Loading home...</p>
-  <!-- START plan item card -->
-  <ng-template [ngIf]="plans">
-    <ion-card *ngFor="let plan of plans" class="card">
-      <ion-card-header>
-        <ion-card-title class="title">
-          {{plan.title}}
-          <a href="" class="author">{{plan.owner}}</a>
-        </ion-card-title>
-      </ion-card-header>
-      <ion-item href="/app/tabs/plan">
-        <ion-card-content>
-          {{plan.description}}
-        </ion-card-content>
-      </ion-item>
-      <ion-footer class="foot">
-        <!-- Add upvote and downvote functions -->
-        <ion-badge class="badge" >
-          <ion-icon name="arrow-round-up">{{plan.upvotes}}</ion-icon>
-        </ion-badge>
-        <ion-badge class="badge" >
-          <ion-icon name="arrow-round-down">{{plan.downvotes}}</ion-icon>
-        </ion-badge>
-      </ion-footer>
-    </ion-card>
-  </ng-template>
-  <!-- END Plan item card -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      close-duration="400ms"
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+      <p *ngIf="loading" class="ion-text-center">Loading home...</p>
+      <!-- START plan item card -->
+      <ng-template [ngIf]="plans">
+        <ion-card *ngFor="let plan of plans" class="card">
+          <ion-card-header>
+            <ion-card-title class="title">
+              {{plan.title}}
+              <a href="" class="author">{{plan.owner}}</a>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-item href="/app/tabs/plan">
+            <ion-card-content>
+              {{plan.description}}
+            </ion-card-content>
+          </ion-item>
+          <ion-footer class="foot">
+            <!-- Add upvote and downvote functions -->
+            <ion-badge class="badge" >
+              <ion-icon name="arrow-round-up">{{plan.upvotes}}</ion-icon>
+            </ion-badge>
+            <ion-badge class="badge" >
+              <ion-icon name="arrow-round-down">{{plan.downvotes}}</ion-icon>
+            </ion-badge>
+          </ion-footer>
+        </ion-card>
+      </ng-template>
+      <!-- END Plan item card -->
 </ion-content>

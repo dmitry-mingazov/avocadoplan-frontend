@@ -8,14 +8,14 @@
 
   --avocado-color-secondary: #d3b152;
   --avocado-color-secondary-contrast: #000000;
-
+  
   /** primary **/
-  --ion-color-primary: #3880ff;
+  --ion-color-primary: #264d00;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
-  --ion-color-primary-tint: #4c8dff;
+  --ion-color-primary-shade: #203d02;
+  --ion-color-primary-tint: #315c03;
 
   /** secondary **/
   --ion-color-secondary: #0cd1e8;
@@ -84,9 +84,10 @@
 
 
 ion-content {
-  --ion-background-color:  #fce198;
+  --ion-background-color:  #ffffff;
 }
 
 ion-item{
-  --ion-background-color: var(--avocado-color-secondary);
+  // --ion-background-color: var(--avocado-color-secondary);
+  --ion-background-color: var(--avocado-color-primary-contrast);
 }

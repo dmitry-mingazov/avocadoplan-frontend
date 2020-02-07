@@ -27,4 +27,11 @@ export class HomePage implements OnInit {
     })
   }
 
+  doRefresh(event) {
+    this.planService.getHome().subscribe((data) => {
+      this.plans = data;
+      event.target.complete();
+    })
+  }
+
 }

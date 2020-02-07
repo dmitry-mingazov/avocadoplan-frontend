@@ -1,5 +1,5 @@
 .card{
-    background-color: var(--avocado-color-secondary);
+    background-color: var(--avocado-color-primary-contrast);
     ion-card-title{
         color: var(--avocado-color-primary);
         font-weight: bold;
@@ -38,3 +38,14 @@
     float: right;
     margin-right: 5%;
 }
+/*
+.head {
+    color: var(--avocado-color-primary-contrast);
+    background-color: var(--avocado-color-primary);
+
+}
+
+ion-header{
+    background-color: var(--avocado-color-primary);
+}
+*/
