@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons>
+      <ion-button (click)="close()">
+        <ion-icon name="close" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Plan</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 <h4>Selected plan</h4>
+<ion-card *ngIf="plan">
+  {{plan | json}}
+</ion-card>
 </ion-content>

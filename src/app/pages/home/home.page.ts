@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { PlanService } from 'src/app/services/plan.service';
 import { Plan } from 'src/app/_interfaces/plan.interface';
+import { PlanPageModule } from '../plan/plan.module';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,8 @@ export class HomePage implements OnInit {
   private loading: boolean = true;
 
   constructor(
-    private planService: PlanService
+    private planService: PlanService,
+    private navCtrl: NavController 
   ) {}
 
   ngOnInit() {
@@ -32,6 +35,10 @@ export class HomePage implements OnInit {
       this.plans = data;
       event.target.complete();
     })
+  }
+
+  openPlan(plan) {
+    this.navCtrl.navigateForward(`plan/${plan._id}`);
   }
 
 }

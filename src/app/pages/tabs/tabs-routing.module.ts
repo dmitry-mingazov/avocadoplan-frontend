@@ -28,15 +28,6 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'plan',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../plan/plan.module').then(m => m.PlanPageModule),
-          }
-        ]
-      },
-      {
         path: 'user',
         children: [
           {

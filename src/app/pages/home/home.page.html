@@ -22,14 +22,15 @@
       <p *ngIf="loading" class="ion-text-center">Loading home...</p>
       <!-- START plan item card -->
       <ng-template [ngIf]="plans">
-        <ion-card *ngFor="let plan of plans" class="card">
+        <ion-card *ngFor="let plan of plans" class="card" 
+        (click)="openPlan(plan)">
           <ion-card-header>
             <ion-card-title class="title">
               {{plan.title}}
               <a href="" class="author">{{plan.owner}}</a>
             </ion-card-title>
           </ion-card-header>
-          <ion-item href="/app/tabs/plan">
+          <ion-item>
             <ion-card-content>
               {{plan.description}}
             </ion-card-content>
