@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { PlanService } from 'src/app/services/plan.service';
 import { Plan } from 'src/app/_interfaces/plan.interface';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-plan',
@@ -16,7 +17,8 @@ export class PlanPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private navCtrl: NavController,
-    private planService: PlanService
+    private planService: PlanService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -37,5 +39,9 @@ export class PlanPage implements OnInit {
     this.planService.getPlanById(this._id).subscribe( (data) => {
       this.plan = data;
     })
+  }
+
+  deletePlan() {
+    this.planService.deletePlanById(this._id);
   }
 }

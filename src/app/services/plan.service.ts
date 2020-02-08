@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { Plan } from '../_interfaces/plan.interface';
 import { API_URL } from '../config';
 import { AuthService } from './auth.service';
@@ -12,11 +13,9 @@ import { JsonPipe } from '@angular/common';
 export class PlanService {
 
   private url = API_URL;
-  private headers = new HttpHeaders({
-    'Content-type': 'application/json; charset=utf-8',
-    'Authorization': `Bearer ${this.auth.accessToken}`
-  })
-
+  private httpOptions = {
+    headers: null
+  };
   private homePlans$: Observable<Plan[]> = new Observable;
   private homePlans: Plan[];
 
@@ -26,34 +25,67 @@ export class PlanService {
       this.homePlans$.subscribe( (data) => {
         this.homePlans = data;
       })
+      this.refreshHeaders();
+
     }
 
+  refreshHeaders() {
+    this.httpOptions.headers = new HttpHeaders({
+      'Content-type': 'application/json; charset=utf-8',
+      'Authorization': `Bearer ${this.auth.accessToken}`
+    });
+
+  }
   public getHome(): Observable<Plan[]>{ 
     console.log(this.url);
-    this.homePlans$ = this.http.get<Plan[]>(this.url);
+    this.homePlans$ = this.http.get<Plan[]>(this.url)
+      .pipe(
+        tap(_ => console.log('Home fetched')),
+        catchError(this.handleError<Plan[]>("getHome"))
+      );
     return this.homePlans$;
   }
 
   public createPlan(plan: Plan){
-    this.http.post(this.url, JSON.stringify(plan, null, 2), {headers: this.headers}).subscribe( (response) => {
-      console.log(response);
-    });
+    this.refreshHeaders();
+    this.http.post(this.url, JSON.stringify(plan, null, 2), this.httpOptions)
+      .pipe(
+        tap(_ => console.log("Plan Created")),
+        catchError(this.handleError<Plan>('createPlan'))
+      ).subscribe();
   }
 
   // Request specific plan to API by _id
   public getPlanById(_id: string) {
-    return this.http.get<Plan>(this.url +'/'+ _id );
+    return this.http.get<Plan>(this.url +'/'+ _id ).pipe(
+      tap(_ => console.log('Plan fetched by Id')),
+      catchError(this.handleError<Plan>('getPlanById'))
+    );
   }
 
   // Load a previously fetched plan by _id
   public loadPlanById(_id: string) {
     if(this.homePlans == undefined)
       return null;
-    console.log("LAZY LOADED");
     let plan = this.homePlans.find(plan => plan._id === _id);
     return plan;
   }
 
+  public deletePlanById(_id: string) {
+    this.refreshHeaders();
+    this.http.delete(this.url + '/' + _id, this.httpOptions).pipe(
+      tap(_ => console.log('Plan deleted')),
+      catchError(this.handleError<Plan>('deletePlan'))
+    ).subscribe();
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    }
+
+  }
 
 
 

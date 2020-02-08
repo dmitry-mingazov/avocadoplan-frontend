@@ -7,12 +7,18 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./user.page.scss'],
 })
 export class UserPage implements OnInit {
+  token: string;
 
   constructor(
     private auth: AuthService
   ) { }
 
   ngOnInit() {
+  }
+
+  showToken() {
+    this.token = this.auth.accessToken;
+    console.log(this.token);
   }
 
 }

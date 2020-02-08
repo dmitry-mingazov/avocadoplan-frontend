@@ -11,7 +11,16 @@
 
 <ion-content>
 <h4>Selected plan</h4>
+<ng-template [ngIf]="plan">
 <ion-card *ngIf="plan">
-  {{plan | json}}
+  <pre>{{plan | json}}</pre>
 </ion-card>
+<ion-button *ngIf="plan.owner === auth.user.sub" 
+  class="block"
+  color="danger"
+  (click)="deletePlan()">
+  <ion-icon name="trash"></ion-icon>
+  DELETE PLAN
+</ion-button>
+</ng-template>
 </ion-content>
