@@ -1,4 +1,4 @@
 export interface Dish {
-    name: string;
+    title: string;
     description: string;
 }

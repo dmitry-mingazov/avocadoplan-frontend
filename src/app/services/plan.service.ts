@@ -6,6 +6,7 @@ import { Plan } from '../_interfaces/plan.interface';
 import { API_URL } from '../config';
 import { AuthService } from './auth.service';
 import { JsonPipe } from '@angular/common';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,9 @@ export class PlanService {
 
   constructor(
     private http: HttpClient,
-    private auth: AuthService) {
+    private auth: AuthService,
+    private toastController: ToastController
+    ) {
       this.homePlans$.subscribe( (data) => {
         this.homePlans = data;
       })
@@ -40,7 +43,7 @@ export class PlanService {
     console.log(this.url);
     this.homePlans$ = this.http.get<Plan[]>(this.url)
       .pipe(
-        tap(_ => console.log('Home fetched')),
+        tap(_ => this.log('Home fetched')),
         catchError(this.handleError<Plan[]>("getHome"))
       );
     return this.homePlans$;
@@ -50,7 +53,7 @@ export class PlanService {
     this.refreshHeaders();
     this.http.post(this.url, JSON.stringify(plan, null, 2), this.httpOptions)
       .pipe(
-        tap(_ => console.log("Plan Created")),
+        tap(_ => this.toast("Plan Created")),
         catchError(this.handleError<Plan>('createPlan'))
       ).subscribe();
   }
@@ -58,7 +61,7 @@ export class PlanService {
   // Request specific plan to API by _id
   public getPlanById(_id: string) {
     return this.http.get<Plan>(this.url +'/'+ _id ).pipe(
-      tap(_ => console.log('Plan fetched by Id')),
+      tap(_ => this.log('Plan fetched by Id')),
       catchError(this.handleError<Plan>('getPlanById'))
     );
   }
@@ -74,18 +77,31 @@ export class PlanService {
   public deletePlanById(_id: string) {
     this.refreshHeaders();
     this.http.delete(this.url + '/' + _id, this.httpOptions).pipe(
-      tap(_ => console.log('Plan deleted')),
+      tap(_ => this.toast('Plan deleted')),
       catchError(this.handleError<Plan>('deletePlan'))
     ).subscribe();
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
+      this.toast(operation + 'failed: ' + error.message);
       return of(result as T);
     }
 
   }
+
+  async toast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  log(message) {
+    console.log(message);
+  }
+
 
 
 

@@ -9,7 +9,7 @@ export class DishForm {
         if(dish == null || dish == undefined)
             return;
         
-        this.name.setValue(dish.name);
+        this.name.setValue(dish.title);
         this.description.setValue(dish.description);
     }
 }
