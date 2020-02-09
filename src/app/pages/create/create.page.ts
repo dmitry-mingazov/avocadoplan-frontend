@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { PlanService } from 'src/app/services/plan.service';
 import { Subscription } from 'rxjs';
@@ -26,7 +26,8 @@ export class CreatePage implements OnInit {
     private alertController: AlertController,
     private fb: FormBuilder,
     private planService: PlanService,
-    private auth: AuthService
+    private auth: AuthService,
+    private navCtrl: NavController 
     ) {
       this.planForm = this.fb.group(new PlanForm());
       this.overlayHidden = new Array(); 
@@ -92,6 +93,10 @@ export class CreatePage implements OnInit {
 
   hideMealOverlay(dayIndex, mealIndex) {
     this.overlayHidden[dayIndex][mealIndex] = true;
+  }
+
+  close() {
+    this.navCtrl.pop();
   }
 
 }

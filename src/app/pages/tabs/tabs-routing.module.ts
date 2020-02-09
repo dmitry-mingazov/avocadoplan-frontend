@@ -18,15 +18,15 @@ const routes: Routes = [
 
         ]
       },
-      {
-        path: 'create',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../create/create.module').then(m => m.CreatePageModule),
-          }
-        ]
-      },
+      // {
+      //   path: 'create',
+      //   children: [
+      //     {
+      //       path: '',
+      //       loadChildren: () => import('../create/create.module').then(m => m.CreatePageModule),
+      //     }
+      //   ]
+      // },
       {
         path: 'user',
         children: [
