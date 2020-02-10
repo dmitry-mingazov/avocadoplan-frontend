@@ -26,7 +26,6 @@ export class CreatePage implements OnInit {
     private fb: FormBuilder,
     private planService: PlanService,
     private auth: AuthService,
-    private navCtrl: NavController,
     private modalCtrl: ModalController
     ) {
       this.planForm = this.fb.group(new PlanForm());
@@ -84,8 +83,5 @@ export class CreatePage implements OnInit {
     return await modal.present();
   }
 
-  close() {
-    this.navCtrl.pop();
-  }
 
 }

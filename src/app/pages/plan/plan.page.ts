@@ -16,7 +16,6 @@ export class PlanPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private navCtrl: NavController,
     private planService: PlanService,
     private auth: AuthService
   ) { }
@@ -25,10 +24,6 @@ export class PlanPage implements OnInit {
     this._id = this.route.snapshot.paramMap.get('id');
     this.loadPlan();
     this.getPlan();
-  }
-
-  close() {
-    this.navCtrl.pop();
   }
 
   loadPlan() {
