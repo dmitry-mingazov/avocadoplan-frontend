@@ -23,7 +23,7 @@ export class PlanService {
   constructor(
     private http: HttpClient,
     private auth: AuthService,
-    private toastController: ToastController
+    private toastCtrl: ToastController
     ) {
       this.homePlans$.subscribe( (data) => {
         this.homePlans = data;
@@ -91,7 +91,7 @@ export class PlanService {
   }
 
   async toast(message) {
-    const toast = await this.toastController.create({
+    const toast = await this.toastCtrl.create({
       message: message,
       duration: 2000
     });

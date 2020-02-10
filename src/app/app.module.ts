@@ -14,10 +14,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { IonicStorageModule } from '@ionic/storage';
 import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
+import { PlanFormComponent } from './components/plan-form/plan-form.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent,
+  ],
+  entryComponents: [
+  ],
   imports: [
       BrowserModule, 
       IonicModule.forRoot(), 
