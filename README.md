@@ -1,5 +1,4 @@
 # Avocadoplan
-- - -
 ## Funzionalità di base
 L'applicazione permette agli utenti iscritti alla piattaforma di poter creare, condividere e scambiare i propri **piani alimentari** personalizzati, permettendo:
 * una maggiore organizzazione delle proprie abitudini alimentari
