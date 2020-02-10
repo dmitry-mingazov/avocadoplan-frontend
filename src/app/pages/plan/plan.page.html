@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
     </ion-buttons>
     <ion-title>Plan</ion-title>
   </ion-toolbar>
@@ -13,12 +13,14 @@
 <ion-card *ngIf="plan">
   <pre>{{plan | json}}</pre>
 </ion-card>
-<ion-button *ngIf="plan.owner === auth.user.sub" 
-  class="block"
-  color="danger"
-  (click)="deletePlan()">
-  <ion-icon name="trash"></ion-icon>
-  DELETE PLAN
-</ion-button>
+<div *ngIf="auth.user">
+    <ion-button *ngIf="plan.owner === auth.user.sub" 
+      class="block"
+    color="danger"
+    (click)="deletePlan()">
+    <ion-icon name="trash"></ion-icon>
+    DELETE PLAN
+  </ion-button>
+</div>
 </ng-template>
 </ion-content>

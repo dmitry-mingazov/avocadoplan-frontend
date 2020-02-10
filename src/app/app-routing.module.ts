@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './services/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/app/tabs/home', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'create',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./pages/create/create.module').then(m => m.CreatePageModule)
   },
   {
@@ -22,7 +24,8 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () => import('./pages/user/user.module').then( m => m.UserPageModule)
-  },  {
+  },
+  {
     path: 'modal-meal',
     loadChildren: () => import('./_modals/modal-meal/modal-meal.module').then( m => m.ModalMealPageModule)
   },
