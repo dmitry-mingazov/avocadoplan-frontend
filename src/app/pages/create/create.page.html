@@ -21,7 +21,7 @@
         <ion-textarea formControlName="plan_description"></ion-textarea>
       </ion-item>
   </form> -->
-  <form [formGroup]="planForm" (ngSubmit)="createPlan()">
+  <form [formGroup]="planForm">
 
 
     <ion-card class="generality">
@@ -87,7 +87,7 @@
                       <ion-icon name="close"></ion-icon>
                     </ion-item>
                     <div [formGroupName]="k">
-                      <ion-input type="text" formControlName="name" placeholder="Nome piatto"></ion-input>
+                      <ion-input type="text" formControlName="title" placeholder="Nome piatto"></ion-input>
                       <ion-input type="text" formControlName="description" placeholder="Descrizione piatto"></ion-input>
                     </div>
                   </ion-card>

@@ -36,12 +36,12 @@ export class CreatePage implements OnInit {
   ngOnInit() {}
 
   async confirm() {
-    const alert = await this.alertController.create({
-      header: 'Confirm',
-      message: 'Do you want to confirm?',
-      buttons: ['cancel', 'OK']
-    });
-    await alert.present();
+    // const alert = await this.alertController.create({
+    //   header: 'Confirm',
+    //   message: 'Do you want to confirm?',
+    //   buttons: ['cancel', 'OK']
+    // });
+    // await alert.present();
     this.createPlan();
   }
 
