@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () => import('./pages/user/user.module').then( m => m.UserPageModule)
+  },  {
+    path: 'modal-meal',
+    loadChildren: () => import('./_modals/modal-meal/modal-meal.module').then( m => m.ModalMealPageModule)
   },
+
 
 
 

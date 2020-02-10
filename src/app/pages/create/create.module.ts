@@ -9,6 +9,8 @@ import { CreatePageRoutingModule } from './create-routing.module';
 import { CreatePage } from './create.page';
 import { PipesModule } from 'src/app/_pipes/pipes/pipes.module';
 import { EnumToArrayPipe } from 'src/app/_pipes/enum-to-array.pipe';
+import { ModalMealPage } from 'src/app/_modals/modal-meal/modal-meal.page';
+import { ModalMealPageModule } from 'src/app/_modals/modal-meal/modal-meal.module';
 
 @NgModule({
   imports: [
@@ -17,10 +19,12 @@ import { EnumToArrayPipe } from 'src/app/_pipes/enum-to-array.pipe';
     IonicModule,
     CreatePageRoutingModule,
     ReactiveFormsModule,
+    ModalMealPageModule
 
   ],
-  declarations: [CreatePage,
-    EnumToArrayPipe
-    ]
+  declarations: [
+    CreatePage
+    ],
+  entryComponents: [ ModalMealPage ]
 })
 export class CreatePageModule {}

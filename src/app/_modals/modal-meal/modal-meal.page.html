@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item (click)="closeModal()">
+      <ion-icon name="close"></ion-icon>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="meal">
+  <ion-item>
+    <ion-select formControlName="type" placeholder="Tipo di pasto" name="type">
+      <ion-select-option *ngFor="let type of mealTypes | enumToArray" value="{{type}}">{{mealTypes[type]}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <div formArrayName="dishes">
+    <ion-item (click)="addDish(meal.controls.dishes)">
+      <ion-icon name="add-circle-outline" size="medium"></ion-icon>
+    </ion-item>
+    <ion-card *ngFor="let dish of meal.get('dishes').controls; let k = index">
+      <ion-item (click)="deleteDish(meal.controls.dishes, k)">
+        <ion-icon name="close"></ion-icon>
+      </ion-item>
+      <div [formGroupName]="k">
+        <ion-input type="text" formControlName="title" placeholder="Nome piatto"></ion-input>
+        <ion-input type="text" formControlName="description" placeholder="Descrizione piatto"></ion-input>
+      </div>
+    </ion-card>
+  </div>
+  </form>
+
+</ion-content>
