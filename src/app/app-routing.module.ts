@@ -29,6 +29,11 @@ const routes: Routes = [
     path: 'modal-meal',
     loadChildren: () => import('./_modals/modal-meal/modal-meal.module').then( m => m.ModalMealPageModule)
   },
+  {
+    path: 'update/:id',
+    loadChildren: () => import('./pages/update/update.module').then( m => m.UpdatePageModule)
+  },
+
 
 
 

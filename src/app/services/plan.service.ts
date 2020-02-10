@@ -82,6 +82,14 @@ export class PlanService {
     ).subscribe();
   }
 
+  public updatePlan(plan: Plan) {
+    this.refreshHeaders();
+    this.http.put(this.url + '/' + plan._id, plan, this.httpOptions).pipe(
+      tap(_ => this.toast('Plan Updated')),
+      catchError(this.handleError<Plan>('updatePlan'))
+    ).subscribe();
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       this.toast(operation + 'failed: ' + error.message);

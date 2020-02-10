@@ -6,9 +6,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { ModalMealPageRoutingModule } from './modal-meal-routing.module';
 
-import { ModalMealPage } from './modal-meal.page';
-import { EnumToArrayPipe } from 'src/app/_pipes/enum-to-array.pipe';
-import { CreatePageModule } from 'src/app/pages/create/create.module';
 
 @NgModule({
   imports: [
@@ -17,10 +14,6 @@ import { CreatePageModule } from 'src/app/pages/create/create.module';
     IonicModule,
     ModalMealPageRoutingModule,
     ReactiveFormsModule
-  ],
-  declarations: [
-    ModalMealPage,
-    EnumToArrayPipe
-    ]
+  ]
 })
 export class ModalMealPageModule {}

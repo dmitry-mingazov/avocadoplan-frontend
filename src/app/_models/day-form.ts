@@ -1,12 +1,15 @@
 import { FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { Day } from '../_interfaces/day.interface';
+import { MealForm } from './meal-form';
+
+const fb = new FormBuilder();
 
 export class DayForm {
     weekDay = new FormControl();
     week = new FormControl();
     meals = new FormArray([]);
 
-    constructor(day: Day) {
+    constructor(day?: Day) {
         if(day == null || day == undefined)
             return;
         this.weekDay.setValue(day.weekDay);
@@ -15,12 +18,10 @@ export class DayForm {
         this.week.setValue(day.week);
         this.week.setValidators([Validators.required]);
 
-        /*
         if(day.meals != null && day.meals != undefined){
             day.meals.forEach( meal => {
-                this.meals.push(this.formBuilder.group(meal))
+                this.meals.push(fb.group(new MealForm(meal)))
             })
         }
-        */
     }
 }

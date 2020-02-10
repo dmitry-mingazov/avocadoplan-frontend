@@ -25,10 +25,12 @@ export class PlanFormComponent implements OnInit {
     private fb: FormBuilder,
     private modalCtrl: ModalController
   ) { 
-    this.planForm = this.fb.group(new PlanForm(this.plan));
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.planForm = this.fb.group(new PlanForm(this.plan));
+    console.log(this.plan);
+  }
 
   addDay() {
     let control = <FormArray>this.planForm.controls.days;

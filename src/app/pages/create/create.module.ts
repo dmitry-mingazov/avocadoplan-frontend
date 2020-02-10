@@ -12,6 +12,7 @@ import { EnumToArrayPipe } from 'src/app/_pipes/enum-to-array.pipe';
 import { ModalMealPage } from 'src/app/_modals/modal-meal/modal-meal.page';
 import { ModalMealPageModule } from 'src/app/_modals/modal-meal/modal-meal.module';
 import { PlanFormComponent } from 'src/app/components/plan-form/plan-form.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -21,14 +22,10 @@ import { PlanFormComponent } from 'src/app/components/plan-form/plan-form.compon
     CreatePageRoutingModule,
     ReactiveFormsModule,
     ModalMealPageModule,
+    SharedModule
   ],
   declarations: [
-    CreatePage,
-    PlanFormComponent
+    CreatePage
     ],
-  entryComponents: [ 
-    ModalMealPage,
-    PlanFormComponent 
-  ]
 })
 export class CreatePageModule {}

@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Update</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="plan">
+    <app-plan-form [plan]="plan" (submit)="updatePlan($event)"> 
+    </app-plan-form>
+  </div>
+</ion-content>

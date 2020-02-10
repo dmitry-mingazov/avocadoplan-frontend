@@ -5,7 +5,7 @@ export class DishForm {
     title = new FormControl();
     description = new FormControl();
 
-    constructor(dish: Dish) {
+    constructor(dish?: Dish) {
         if(dish == null || dish == undefined)
             return;
         
