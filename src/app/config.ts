@@ -1,4 +1,6 @@
-// export const API_URL = "10.0.2.115";
-export const API_URL = "http://167.172.108.41/api/plans";
-
+export const API_BASE = "http://167.172.108.41/api";
+export const API_PLANS = "/plans";
+export const API_UPVOTE = "/upvote";
+export const API_DOWNVOTE = "/downvote";
+export const API_USERS = "/users";
 

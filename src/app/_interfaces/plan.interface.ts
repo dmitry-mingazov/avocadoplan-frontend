@@ -2,15 +2,19 @@ import { User } from './user.interface';
 import { Day } from './day.interface';
 
 export interface Plan {
-    _id?: string,
+    _id?: string;
+    votes?: number[];
     title: string;
-    descritpion: string;
+    description: string;
     drinkDescription: string;
-    owner: User;
+    owner: string;
     // createdAt: Date;
     // lastModifiedAt: Date;
     tags: string[];
     // upvotes: number;
     // downvotes: number;
     days: Day[];
+
+    upvoted?: boolean;
+    downvoted?: boolean;
 }

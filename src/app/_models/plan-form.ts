@@ -19,7 +19,7 @@ export class PlanForm {
         if(plan._id != null || plan._id != undefined)
             this._id = plan._id;
         this.title.setValue(plan.title);
-        this.description.setValue(plan.descritpion);
+        this.description.setValue(plan.description);
         this.drinkDescription.setValue(plan.drinkDescription);
         if(plan.owner != null || plan.owner != undefined)
             this.owner = plan.owner;

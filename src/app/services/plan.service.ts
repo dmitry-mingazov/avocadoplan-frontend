@@ -3,17 +3,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Plan } from '../_interfaces/plan.interface';
-import { API_URL } from '../config';
+import { API_BASE, API_DOWNVOTE, API_PLANS, API_UPVOTE } from '../config';
 import { AuthService } from './auth.service';
 import { JsonPipe } from '@angular/common';
 import { ToastController } from '@ionic/angular';
+import { HttpHelperService } from './http-helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlanService {
 
-  private url = API_URL;
+  private baseUrl = API_BASE + API_PLANS;
+  private upvote = API_UPVOTE;
+  private downvote = API_DOWNVOTE;
   private httpOptions = {
     headers: null
   };
@@ -23,46 +26,37 @@ export class PlanService {
   constructor(
     private http: HttpClient,
     private auth: AuthService,
-    private toastCtrl: ToastController
+    private helper: HttpHelperService
     ) {
       this.homePlans$.subscribe( (data) => {
         this.homePlans = data;
       })
-      this.refreshHeaders();
 
     }
 
-  refreshHeaders() {
-    this.httpOptions.headers = new HttpHeaders({
-      'Content-type': 'application/json; charset=utf-8',
-      'Authorization': `Bearer ${this.auth.accessToken}`
-    });
-
-  }
   public getHome(): Observable<Plan[]>{ 
-    console.log(this.url);
-    this.homePlans$ = this.http.get<Plan[]>(this.url)
+    console.log(this.baseUrl);
+    this.homePlans$ = this.http.get<Plan[]>(this.baseUrl)
       .pipe(
-        tap(_ => this.log('Home fetched')),
-        catchError(this.handleError<Plan[]>("getHome"))
+        tap(_ => this.helper.log('Home fetched')),
+        catchError(this.helper.handleError<Plan[]>("getHome"))
       );
     return this.homePlans$;
   }
 
   public createPlan(plan: Plan){
-    this.refreshHeaders();
-    this.http.post(this.url, JSON.stringify(plan, null, 2), this.httpOptions)
+    this.http.post(this.baseUrl, plan, this.helper.getAuthOptions())
       .pipe(
-        tap(_ => this.toast("Plan Created")),
-        catchError(this.handleError<Plan>('createPlan'))
+        tap(_ => this.helper.showToast("Plan Created")),
+        catchError(this.helper.handleError<Plan>('createPlan'))
       ).subscribe();
   }
 
   // Request specific plan to API by _id
   public getPlanById(_id: string) {
-    return this.http.get<Plan>(this.url +'/'+ _id ).pipe(
-      tap(_ => this.log('Plan fetched by Id')),
-      catchError(this.handleError<Plan>('getPlanById'))
+    return this.http.get<Plan>(`${this.baseUrl}/${_id}`).pipe(
+      tap(_ => this.helper.log('Plan fetched by Id')),
+      catchError(this.helper.handleError<Plan>('getPlanById'))
     );
   }
 
@@ -75,40 +69,33 @@ export class PlanService {
   }
 
   public deletePlanById(_id: string) {
-    this.refreshHeaders();
-    this.http.delete(this.url + '/' + _id, this.httpOptions).pipe(
-      tap(_ => this.toast('Plan deleted')),
-      catchError(this.handleError<Plan>('deletePlan'))
+    this.http.delete(`${this.baseUrl}/${_id}`, this.helper.getAuthOptions()).pipe(
+      tap(_ => this.helper.showToast('Plan deleted')),
+      catchError(this.helper.handleError<Plan>('deletePlan'))
     ).subscribe();
   }
 
   public updatePlan(plan: Plan) {
-    this.refreshHeaders();
-    this.http.put(this.url + '/' + plan._id, plan, this.httpOptions).pipe(
-      tap(_ => this.toast('Plan Updated')),
-      catchError(this.handleError<Plan>('updatePlan'))
+    this.http.put(`${this.baseUrl}/${plan._id}`, plan, this.helper.getAuthOptions()).pipe(
+      tap(_ => this.helper.showToast('Plan Updated')),
+      catchError(this.helper.handleError<Plan>('updatePlan'))
     ).subscribe();
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      this.toast(operation + 'failed: ' + error.message);
-      return of(result as T);
-    }
-
+  public upvotePlan(_id: string) {
+    this.http.put(`${this.baseUrl}${this.upvote}/${_id}`, null, this.helper.getAuthOptions()).pipe(
+      tap(_ => this.helper.showToast('Plan Upvoted')),
+      catchError(this.helper.handleError<Plan>('upvotePlan'))
+    ).subscribe();
   }
 
-  async toast(message) {
-    const toast = await this.toastCtrl.create({
-      message: message,
-      duration: 2000
-    });
-    toast.present();
+  public downvotePlan(_id: string) {
+    this.http.put(`${this.baseUrl}${this.downvote}/${_id}`, null, this.helper.getAuthOptions()).pipe(
+      tap(_ => this.helper.showToast('Plan Downvoted')),
+      catchError(this.helper.handleError<Plan>('upvotePlan'))
+    ).subscribe();
   }
 
-  log(message) {
-    console.log(message);
-  }
 
 
 

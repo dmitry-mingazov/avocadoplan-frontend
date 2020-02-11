@@ -6,6 +6,8 @@ import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
 import { AUTH_CONFIG } from './auth.config';
 import Auth0Cordova from '@auth0/cordova';
 import * as auth0 from 'auth0-js';
+import { HttpHeaders } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 declare let cordova: any;
 
@@ -15,7 +17,9 @@ export class AuthService {
   Client = new Auth0Cordova(AUTH_CONFIG);
   accessToken: string;
   user: any;
-  loggedIn: boolean;
+  loggedIn: boolean = false;
+  loggedInSub: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  loggedIn$: Observable<boolean> = this.loggedInSub.asObservable();
   loading = true;
 
   constructor(
@@ -26,15 +30,18 @@ export class AuthService {
     this.storage.get('profile').then(user => this.user = user);
     this.storage.get('access_token').then(token => this.accessToken = token);
     this.storage.get('expires_at').then(exp => {
-      this.loggedIn = Date.now() < JSON.parse(exp);
+      this.loggedInSub.next(Date.now() < JSON.parse(exp));
       this.loading = false;
     });
+    this.loggedIn$.subscribe( (loggedIn) => {
+      this.loggedIn = loggedIn;
+    })
   }
 
   login() {
     this.loading = true;
     const options = {
-      audience: 'http://localhost:3000',
+      audience: AUTH_CONFIG.audience,
       scope: 'openid profile offline_access'
     };
     // Authorize login request with Auth0: open login page and get auth results
@@ -53,7 +60,7 @@ export class AuthService {
       this.storage.set('expires_at', expiresAt);
       // Set logged in
       this.loading = false;
-      this.loggedIn = true;
+      this.loggedInSub.next(true);
       // Fetch user's profile info
       this.Auth0.client.userInfo(this.accessToken, (err, profile) => {
         if (err) {
@@ -70,7 +77,7 @@ export class AuthService {
   logout() {
     this.accessToken = null;
     this.user = null;
-    this.loggedIn = false;
+    this.loggedInSub.next(false);
     this.safariViewController.isAvailable()
       .then((available: boolean) => {
         const auth0Domain = AUTH_CONFIG.domain;
@@ -102,4 +109,5 @@ export class AuthService {
       }
     );
   }
+
 }
