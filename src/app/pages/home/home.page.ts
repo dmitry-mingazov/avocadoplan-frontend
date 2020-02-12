@@ -7,8 +7,6 @@ import { NavController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/_interfaces/user.interface';
 
-const UPVOTE = true;
-const DOWNVOTE = false;
 
 @Component({
   selector: 'app-home',
@@ -16,14 +14,14 @@ const DOWNVOTE = false;
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  UPVOTE = true;
+  DOWNVOTE = false;
   private plans: Plan[] = null;
   private loading: boolean = true;
 
-  private user: User;
-  private votedPlans: Map<string, number> = new Map();
+  private votedPlans: Map<string, number> = new Map<string, number>();
   private userFetched: boolean = false;
 
-  private plansMapped: boolean = false;
 
   private mapPlan = (plan) => {
     if(this.userFetched) {
@@ -55,19 +53,16 @@ export class HomePage implements OnInit {
     this.auth.loggedIn$.subscribe( (loggedIn) => {
       if(loggedIn) {
         this.userService.getUserById(this.auth.user.sub).subscribe( (user) => {
-          this.user = user;
           this.userFetched = true;
           Object.keys(user.votes).forEach( (_id) => {
             this.votedPlans.set(_id, user.votes[_id]);
           })
           if(this.plans != null) {
             this.plans.map<Plan>(this.mapPlan);
-            this.plansMapped = true;
           }
         })
-        } else {
-          this.plansMapped = true;
-        }
+        } 
+
       }
     )
     this.getHome();
@@ -92,25 +87,49 @@ export class HomePage implements OnInit {
     this.navCtrl.navigateForward(`plan/${plan._id}`);
   }
 
-  upvotePlan(plan) {
-    this.planService.upvotePlan(plan._id);
-    this.modifyLocalVotes(plan, UPVOTE);
-  }
-  
-  downvotePlan(plan) {
-    this.planService.downvotePlan(plan._id);
-    this.modifyLocalVotes(plan, DOWNVOTE);
+  votePlan(plan: Plan, vote: boolean) {
+    if(!this.auth.loggedIn){
+      // TODO: create middleware service to communicate the 401
+    } else {
+      // if vote is equals to one vote already given to the plan
+      if(vote && plan.upvoted || !vote && plan.downvoted){
+        this.unVote(plan, vote);
+        this.modifyLocalVotes(plan);
+      // else if vote is upvote
+      } else {
+        if(vote) {
+            this.planService.upvotePlan(plan._id);
+        // else vote is downvote
+        } else {
+            this.planService.downvotePlan(plan._id);
+        }
+        this.modifyLocalVotes(plan, vote);
+      }
+      
+    }
+
   }
 
-  modifyLocalVotes(plan, newVote) {
+  unVote(plan, vote) {
+    console.log("Unvoted");
+
+  }
+
+  modifyLocalVotes(plan, newVote?: boolean) {
     
-    if(plan.upvoted == plan.downvoted)
-      plan.votes += newVote ? 1 : -1;
-    else
-      plan.votes += newVote ? 2 : -2;
-    plan.upvoted = newVote;
-    plan.downvoted = !newVote;
-    this.votedPlans.set(plan._id, newVote ? 1 : -1);
+    if(newVote === undefined) {
+      plan.votes += plan.upvoted ? -1 : 1;
+      plan.upvoted = false;
+      plan.downvoted = false;
+    } else {
+      if(plan.upvoted == plan.downvoted)
+        plan.votes += newVote ? 1 : -1;
+      else
+        plan.votes += newVote ? 2 : -2;
+      plan.upvoted = newVote;
+      plan.downvoted = !newVote;
+      this.votedPlans.set(plan._id, newVote ? 1 : -1);
+    }
   }
 
 }

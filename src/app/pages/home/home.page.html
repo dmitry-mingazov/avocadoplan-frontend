@@ -38,11 +38,11 @@
             <!-- Add upvote and downvote functions -->
             <ion-buttons>
 
-              <ion-button color="primary" disabled="{{plan.upvoted}}" (click)="upvotePlan(plan)">
+              <ion-button color="{{plan.upvoted ? 'primary' : 'medium'}}" (click)="votePlan(plan, UPVOTE)">
                 <ion-icon name="arrow-round-up"></ion-icon>
               </ion-button>
               {{plan.votes}}
-              <ion-button color="primary" disabled="{{plan.downvoted}}" (click)="downvotePlan(plan)">
+              <ion-button color="{{plan.downvoted ? 'primary' : 'medium'}}" (click)="votePlan(plan, DOWNVOTE)">
                 <ion-icon name="arrow-round-down"></ion-icon>
               </ion-button>
             </ion-buttons>
