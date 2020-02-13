@@ -4,3 +4,4 @@ export const API_UPVOTE = "/upvote";
 export const API_DOWNVOTE = "/downvote";
 export const API_USERS = "/users";
 
+export const ACCESS_TOKEN = undefined;
