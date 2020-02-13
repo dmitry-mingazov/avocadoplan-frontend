@@ -3,7 +3,7 @@ import { Day } from './day.interface';
 
 export interface Plan {
     _id?: string;
-    votes?: number[];
+    votes?: number;
     title: string;
     description: string;
     drinkDescription: string;
