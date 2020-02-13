@@ -83,7 +83,7 @@ export class HomePage implements OnInit {
 
   }
 
-  openPlan(plan) {
+  openPlan(plan: Plan) {
     this.navCtrl.navigateForward(`plan/${plan._id}`);
   }
 
@@ -93,7 +93,7 @@ export class HomePage implements OnInit {
     } else {
       // if vote is equals to one vote already given to the plan
       if(vote && plan.upvoted || !vote && plan.downvoted){
-        this.unVote(plan, vote);
+        this.planService.unvotePlan(plan._id);
         this.modifyLocalVotes(plan);
       // else if vote is upvote
       } else {
@@ -110,12 +110,7 @@ export class HomePage implements OnInit {
 
   }
 
-  unVote(plan, vote) {
-    console.log("Unvoted");
-
-  }
-
-  modifyLocalVotes(plan, newVote?: boolean) {
+  modifyLocalVotes(plan: Plan, newVote?: boolean) {
     
     if(newVote === undefined) {
       plan.votes += plan.upvoted ? -1 : 1;
