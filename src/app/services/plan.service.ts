@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Plan } from '../_interfaces/plan.interface';
-import { API_BASE, API_DOWNVOTE, API_PLANS, API_UPVOTE } from '../config';
+import { API_BASE, API_DOWNVOTE, API_PLANS, API_UPVOTE, API_UNVOTE } from '../config';
 import { AuthService } from './auth.service';
 import { JsonPipe } from '@angular/common';
 import { ToastController } from '@ionic/angular';
@@ -17,6 +17,7 @@ export class PlanService {
   private baseUrl = API_BASE + API_PLANS;
   private upvote = API_UPVOTE;
   private downvote = API_DOWNVOTE;
+  private unvote = API_UNVOTE;
   private httpOptions = {
     headers: null
   };
@@ -27,14 +28,14 @@ export class PlanService {
     private http: HttpClient,
     private auth: AuthService,
     private helper: HttpHelperService
-    ) {
-      this.homePlans$.subscribe( (data) => {
-        this.homePlans = data;
-      })
+  ) {
+    this.homePlans$.subscribe((data) => {
+      this.homePlans = data;
+    })
 
-    }
+  }
 
-  public getHome(): Observable<Plan[]>{ 
+  public getHome(): Observable<Plan[]> {
     console.log(this.baseUrl);
     this.homePlans$ = this.http.get<Plan[]>(this.baseUrl)
       .pipe(
@@ -44,7 +45,7 @@ export class PlanService {
     return this.homePlans$;
   }
 
-  public createPlan(plan: Plan){
+  public createPlan(plan: Plan) {
     this.http.post(this.baseUrl, plan, this.helper.getAuthOptions())
       .pipe(
         tap(_ => this.helper.showToast("Plan Created")),
@@ -62,7 +63,7 @@ export class PlanService {
 
   // Load a previously fetched plan by _id
   public loadPlanById(_id: string) {
-    if(this.homePlans == undefined)
+    if (this.homePlans == undefined)
       return null;
     let plan = this.homePlans.find(plan => plan._id === _id);
     return plan;
@@ -96,9 +97,14 @@ export class PlanService {
     ).subscribe();
   }
 
+  public unvotePlan(_id: string) {
+    this.http.put(`${this.baseUrl}${this.unvote}/${_id}`, null, this.helper.getAuthOptions()).pipe(
+      tap(_ => this.helper.showToast('Plan Unvoted')),
+      catchError(this.helper.handleError<Plan>('unvotePlan'))
+    ).subscribe();
+  }
 
 
 
 
-  
 }

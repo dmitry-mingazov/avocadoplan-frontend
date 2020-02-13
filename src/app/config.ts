@@ -3,5 +3,6 @@ export const API_PLANS = "/plans";
 export const API_UPVOTE = "/upvote";
 export const API_DOWNVOTE = "/downvote";
 export const API_USERS = "/users";
+export const API_UNVOTE = "/unvote";
 
 export const ACCESS_TOKEN = undefined;

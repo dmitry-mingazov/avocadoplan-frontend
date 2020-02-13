@@ -3,7 +3,7 @@
     <name>AvocadoPlan</name>
     <description>An application to manage alimentar plans for individuals</description>
     <author email="dmitry.mingazov@studenti.unicam.it" href="http://github.com/dmitry-mingazov/avocadoplan-frontend">Dmitry Mingazov, Marco Zamponi, Lucia Passeri</author>
-    <content original-src="index.html" src="http://localhost:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
