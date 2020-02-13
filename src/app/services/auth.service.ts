@@ -9,6 +9,8 @@ import * as auth0 from 'auth0-js';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 
+import { ACCESS_TOKEN } from '../config';
+
 declare let cordova: any;
 
 @Injectable()
@@ -27,6 +29,7 @@ export class AuthService {
     private storage: Storage,
     private safariViewController: SafariViewController
   ) {
+    this.storage.clear();
     this.storage.get('profile').then(user => this.user = user);
     this.storage.get('access_token').then(token => this.accessToken = token);
     this.storage.get('expires_at').then(exp => {
@@ -39,29 +42,11 @@ export class AuthService {
   }
 
   login() {
-    this.loading = true;
-    const options = {
-      audience: AUTH_CONFIG.audience,
-      scope: 'openid profile offline_access'
-    };
-    // Authorize login request with Auth0: open login page and get auth results
-    this.Client.authorize(options, (err, authResult) => {
-      if (err) {
-        this.zone.run(() => this.loading = false);
-        throw err;
-      }
-      console.log(authResult);
-      console.log(authResult.accessToken);
-      // Set access token
-      this.storage.set('access_token', authResult.accessToken);
-      this.accessToken = authResult.accessToken;
-      // Set access token expiration
-      const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-      this.storage.set('expires_at', expiresAt);
-      // Set logged in
-      this.loading = false;
+    if(ACCESS_TOKEN != undefined) {
+      this.accessToken = ACCESS_TOKEN;
+      this.storage.set('access_token', this.accessToken);
+      this.storage.set('expires_at', new Date());
       this.loggedInSub.next(true);
-      // Fetch user's profile info
       this.Auth0.client.userInfo(this.accessToken, (err, profile) => {
         if (err) {
           throw err;
@@ -71,7 +56,43 @@ export class AuthService {
           this.zone.run(() => this.user = profile)
         );
       });
-    });
+
+    } else {
+
+        this.loading = true;
+        const options = {
+        audience: AUTH_CONFIG.audience,
+        scope: 'openid profile offline_access'
+      };
+      // Authorize login request with Auth0: open login page and get auth results
+      this.Client.authorize(options, (err, authResult) => {
+        if (err) {
+          this.zone.run(() => this.loading = false);
+          throw err;
+        }
+        console.log(authResult);
+        console.log(authResult.accessToken);
+        // Set access token
+        this.storage.set('access_token', authResult.accessToken);
+        this.accessToken = authResult.accessToken;
+        // Set access token expiration
+        const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+        this.storage.set('expires_at', expiresAt);
+        // Set logged in
+        this.loading = false;
+        this.loggedInSub.next(true);
+        // Fetch user's profile info
+        this.Auth0.client.userInfo(this.accessToken, (err, profile) => {
+          if (err) {
+            throw err;
+          }
+          console.log(profile);
+          this.storage.set('profile', profile).then(val =>
+            this.zone.run(() => this.user = profile)
+          );
+        });
+      });
+    }
   }
 
   logout() {
