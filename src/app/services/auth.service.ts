@@ -46,15 +46,15 @@ export class AuthService {
       this.accessToken = ACCESS_TOKEN;
       this.storage.set('access_token', this.accessToken);
       this.storage.set('expires_at', new Date(Date.now() + 7200));
-      this.loggedInSub.next(true);
       this.Auth0.client.userInfo(this.accessToken, (err, profile) => {
         if (err) {
           throw err;
         }
         console.log(profile);
-        this.storage.set('profile', profile).then(val =>
+        this.storage.set('profile', profile).then((val) => {
           this.zone.run(() => this.user = profile)
-        );
+          this.loggedInSub.next(true);
+        });
       });
 
     } else {
