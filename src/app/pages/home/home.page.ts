@@ -62,8 +62,13 @@ export class HomePage implements OnInit {
   private mapPlan = plan => {
     if (this.userFetched) {
       let vote = this.votedPlans.get(plan._id);
-      plan.upvoted = vote ? false : vote > 0;
-      plan.downvoted = vote ? false : vote < 0;
+      if(vote == undefined){
+        plan.upvoted = false;
+        plan.downvoted = false;
+      } else {
+        plan.upvoted = vote > 0;
+        plan.downvoted = vote <0;
+      }
     } else {
       plan.upvoted = false;
       plan.downvoted = false;
