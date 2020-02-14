@@ -1,0 +1,26 @@
+<ion-card class="card">
+  <ion-card-header>
+    <ion-card-title class="title">
+      {{plan.title}}
+      <a href="" class="author">{{plan.owner}}</a>
+    </ion-card-title>
+  </ion-card-header>
+  <ion-item (click)="openPlan(plan)">
+    <ion-card-content>
+      {{plan.description}}
+    </ion-card-content>
+  </ion-item>
+  <ion-footer class="foot">
+    <!-- Add upvote and downvote functions -->
+    <ion-buttons>
+
+      <ion-button color="{{plan.upvoted ? 'primary' : 'medium'}}" (click)="votePlan(plan, UPVOTE)">
+        <ion-icon name="arrow-round-up"></ion-icon>
+      </ion-button>
+      {{plan.votes}}
+      <ion-button color="{{plan.downvoted ? 'primary' : 'medium'}}" (click)="votePlan(plan, DOWNVOTE)">
+        <ion-icon name="arrow-round-down"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-footer>
+</ion-card>
