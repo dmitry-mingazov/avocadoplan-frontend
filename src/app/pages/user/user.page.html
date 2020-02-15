@@ -23,7 +23,7 @@
         </ion-button>
       </ion-item>
       <h1>Your plans:</h1>
-      <app-plan-card *ngFor="let plan of userPlans" [plan]="plan" [votedPlans]="votedPlans"></app-plan-card>
+      <app-plan-card-list [plans$]="userPlans$"></app-plan-card-list>
     </ng-template>
   </ng-template>
 </ion-content>

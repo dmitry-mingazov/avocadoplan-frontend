@@ -6,6 +6,7 @@ import { IonicModule } from "@ionic/angular";
 import { ReactiveFormsModule } from "@angular/forms";
 import { EnumToArrayPipe } from "../_pipes/enum-to-array.pipe";
 import { PlanCardComponent } from "../components/plan-card/plan-card.component";
+import { PlanCardListComponent } from "../components/plan-card-list/plan-card-list.component";
 
 @NgModule({
   imports: [CommonModule, IonicModule, ReactiveFormsModule],
@@ -13,12 +14,14 @@ import { PlanCardComponent } from "../components/plan-card/plan-card.component";
     ModalMealPage,
     PlanFormComponent,
     PlanCardComponent,
+    PlanCardListComponent,
     EnumToArrayPipe
   ],
   exports: [
     ModalMealPage,
     PlanFormComponent,
     PlanCardComponent,
+    PlanCardListComponent,
     EnumToArrayPipe
   ]
 })
