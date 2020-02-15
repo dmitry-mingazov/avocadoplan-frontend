@@ -31,7 +31,6 @@ export class HomePage implements OnInit {
     this.auth.loggedIn$.subscribe(loggedIn => {
       if (loggedIn) {
         this.userService.getUserById(this.auth.user.sub).subscribe(user => {
-          console.log("here");
           this.userFetched = true;
           Object.keys(user.votes).forEach(_id => {
             this.votedPlans.set(_id, user.votes[_id]);
@@ -62,13 +61,8 @@ export class HomePage implements OnInit {
   private mapPlan = plan => {
     if (this.userFetched) {
       let vote = this.votedPlans.get(plan._id);
-      if(vote == undefined){
-        plan.upvoted = false;
-        plan.downvoted = false;
-      } else {
-        plan.upvoted = vote > 0;
-        plan.downvoted = vote <0;
-      }
+      plan.upvoted = vote ? vote > 0 : undefined;
+      plan.downvoted = vote ? vote < 0 : undefined;
     } else {
       plan.upvoted = false;
       plan.downvoted = false;

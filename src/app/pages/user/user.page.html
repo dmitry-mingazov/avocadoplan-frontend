@@ -22,16 +22,8 @@
           <ion-icon name="log-out"></ion-icon>
         </ion-button>
       </ion-item>
-      <!--
-      <ion-card *ngIf="auth.user">
-        <img [src]="auth.user.picture">
-        <ion-card-content>
-          <ion-card-title>{{ auth.user.name }}</ion-card-title>
-          <pre>{{ auth.user | json }}</pre>
-        </ion-card-content>
-      </ion-card>
-      <ion-button button expand="block" color="danger" (click)="auth.logout()">Log Out</ion-button>
-     -->
+      <h1>Your plans:</h1>
+      <app-plan-card *ngFor="let plan of userPlans" [plan]="plan" [votedPlans]="votedPlans"></app-plan-card>
     </ng-template>
   </ng-template>
 </ion-content>
