@@ -10,7 +10,8 @@ import {
   API_UPVOTE,
   API_UNVOTE,
   API_OWNED_BY,
-  API_SAVED
+  API_SAVED,
+  API_SAVE
 } from "../config";
 import { AuthService } from "./auth.service";
 import { JsonPipe } from "@angular/common";
@@ -27,6 +28,7 @@ export class PlanService {
   private unvote = API_UNVOTE;
   private ownedBy = API_OWNED_BY;
   private saved = API_SAVED;
+  private save = API_SAVE;
   private httpOptions = {
     headers: null
   };
@@ -157,6 +159,20 @@ export class PlanService {
       .pipe(
         tap(_ => this.helper.showToast("Plan Unvoted")),
         catchError(this.helper.handleError<Plan>("unvotePlan"))
+      )
+      .subscribe();
+  }
+
+  public savePlan(_id: string) {
+    this.http
+      .put(
+        `${this.baseUrl}${this.save}/${_id}`,
+        null,
+        this.helper.getAuthOptions()
+      )
+      .pipe(
+        tap(_ => this.helper.showToast("Plan saved")),
+        catchError(this.helper.handleError<Plan>("savePlan"))
       )
       .subscribe();
   }

@@ -16,7 +16,6 @@ export class PlanCardListComponent implements OnInit {
   private plans: Plan[] = null;
   private votedPlans: Map<string, number> = new Map<string, number>();
   private userFetched: boolean = false;
-  private loading: boolean = true;
 
   private mapPlan = plan => {
     if (this.userFetched) {
@@ -36,7 +35,6 @@ export class PlanCardListComponent implements OnInit {
     if (this.plans$) {
       this.plans$.subscribe(data => {
         this.plans = data;
-        this.loading = false;
       });
     }
     this.auth.loggedIn$.subscribe(loggedIn => {
