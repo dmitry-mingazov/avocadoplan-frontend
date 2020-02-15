@@ -12,6 +12,7 @@ import { Observable } from "rxjs";
 })
 export class UserPage implements OnInit {
   private userPlans$: Observable<Plan[]> = null;
+  private savedPlans$: Observable<Plan[]> = null;
 
   constructor(private planService: PlanService, private auth: AuthService) {}
 
@@ -19,6 +20,7 @@ export class UserPage implements OnInit {
     this.auth.loggedIn$.subscribe(loggedIn => {
       if (loggedIn) {
         this.userPlans$ = this.planService.getUserPlans(this.auth.user.sub);
+        this.savedPlans$ = this.planService.getSavedPlans(this.auth.user.sub);
       }
     });
   }

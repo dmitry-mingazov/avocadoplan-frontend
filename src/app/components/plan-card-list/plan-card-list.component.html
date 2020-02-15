@@ -1,6 +1,12 @@
-<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
-        refreshingText="Refreshing...">
-    </ion-refresher-content>
-</ion-refresher>
-<app-plan-card *ngFor="let plan of plans" [plan]="plan" [votedPlans]="votedPlans"></app-plan-card>
+<div *ngIf="plans && plans.length > 0">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+            refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <app-plan-card *ngFor="let plan of plans" [plan]="plan" [votedPlans]="votedPlans"></app-plan-card>
+</div>
+<div *ngIf="plans && plans.length == 0">
+    <h1>Nothing here</h1>
+    <ion-icon name="sad" size=large></ion-icon>
+</div>

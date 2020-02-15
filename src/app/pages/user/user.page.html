@@ -11,7 +11,7 @@
     <ion-button button expand="block" color="primary" *ngIf="!auth.loggedIn" (click)="auth.login()">Log In</ion-button>
     <!-- Not loading, logged in: show profile and logout button -->
     <ng-template [ngIf]="auth.loggedIn">
-      <ion-item *ngIf="auth.user">
+      <ion-item>
         <ion-avatar slot="start">
           <img [src]="auth.user.picture">
         </ion-avatar>
@@ -22,8 +22,16 @@
           <ion-icon name="log-out"></ion-icon>
         </ion-button>
       </ion-item>
-      <h1>Your plans:</h1>
-      <app-plan-card-list [plans$]="userPlans$"></app-plan-card-list>
+      <ion-slides class="user-plan-list">
+        <ion-slide>
+          <ion-item>
+            <app-plan-card-list [plans$]="userPlans$"></app-plan-card-list>
+          </ion-item>
+        </ion-slide>
+        <ion-slide>
+          <app-plan-card-list [plans$]="savedPlans$"></app-plan-card-list>
+        </ion-slide>
+      </ion-slides>
     </ng-template>
   </ng-template>
 </ion-content>

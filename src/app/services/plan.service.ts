@@ -9,7 +9,8 @@ import {
   API_PLANS,
   API_UPVOTE,
   API_UNVOTE,
-  API_OWNED_BY
+  API_OWNED_BY,
+  API_SAVED
 } from "../config";
 import { AuthService } from "./auth.service";
 import { JsonPipe } from "@angular/common";
@@ -25,6 +26,7 @@ export class PlanService {
   private downvote = API_DOWNVOTE;
   private unvote = API_UNVOTE;
   private ownedBy = API_OWNED_BY;
+  private saved = API_SAVED;
   private httpOptions = {
     headers: null
   };
@@ -32,14 +34,12 @@ export class PlanService {
   private homePlans: Plan[];
 
   private userPlans$: Observable<Plan[]> = new Observable();
-  private userPlans: Plan[];
+
+  private savedPlans$: Observable<Plan[]> = new Observable();
 
   constructor(private http: HttpClient, private helper: HttpHelperService) {
     this.homePlans$.subscribe(data => {
       this.homePlans = data;
-    });
-    this.userPlans$.subscribe(data => {
-      this.userPlans = data;
     });
   }
 
@@ -57,10 +57,21 @@ export class PlanService {
     this.userPlans$ = this.http
       .get<Plan[]>(`${this.baseUrl}${this.ownedBy}/${_id}`)
       .pipe(
-        tap(_ => this.helper.log("Home fetched")),
+        tap(_ => this.helper.log("User plans fetched")),
         catchError(this.helper.handleError<Plan[]>("getUserPlans"))
       );
     return this.userPlans$;
+  }
+
+  public getSavedPlans(_id: string): Observable<Plan[]> {
+    console.log(this.baseUrl);
+    this.savedPlans$ = this.http
+      .get<Plan[]>(`${this.baseUrl}${this.saved}`, this.helper.getAuthOptions())
+      .pipe(
+        tap(_ => this.helper.log("Saved plans fetched")),
+        catchError(this.helper.handleError<Plan[]>("getSavedPlans"))
+      );
+    return this.savedPlans$;
   }
 
   public createPlan(plan: Plan) {
