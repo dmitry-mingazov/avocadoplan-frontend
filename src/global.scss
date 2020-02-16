@@ -25,7 +25,39 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+<<<<<<< HEAD
 // .meal-modal{
 //     padding: 30px;
 //     background: rgba(0, 0, 0, 0.5);
 // }
+=======
+.meal-modal{
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.card{
+    padding-left: 3%;
+    background-color: var(--avocado-color-primary-contrast);
+    ion-card-title{
+      color: var(--avocado-color-primary);
+      font-weight: bold;
+      font-size: small;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    ion-card-content{
+      font-size: x-small;
+      :hover{
+          background-color: saturation($color: #fce198);
+      }
+    }
+}
+
+.author{
+    color: "primary";
+    font-size: x-small;
+    float: right;
+}
+>>>>>>> planPage

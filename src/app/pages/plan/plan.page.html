@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
     </ion-buttons>
@@ -8,26 +8,41 @@
 </ion-header>
 
 <ion-content>
-<h4>Selected plan</h4>
-<ng-template [ngIf]="plan">
-<ion-card *ngIf="plan">
-  <pre>{{plan | json}}</pre>
-</ion-card>
-<div *ngIf="auth.user">
-  <ion-button *ngIf="plan.owner === auth.user.sub" 
-    class="block"
-    color="danger"
-    (click)="deletePlan()">
-    <ion-icon name="trash"></ion-icon>
-    DELETE PLAN
-  </ion-button>
-  <ion-button *ngIf="plan.owner === auth.user.sub" 
-    class="block"
-    color="primary"
-    (click)="updatePlan()">
-    <ion-icon name="pencil-outline"></ion-icon>
-   Update Plan 
-  </ion-button>
-</div>
-</ng-template>
+  <ng-template [ngIf]="plan">
+    <ion-card class="card">
+      <ion-card-header>
+        <ion-card-title>{{plan.title}}
+          <a href="" class="author">{{plan.owner}}</a>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{plan.description}} <br>
+        Bevande: {{plan.drinkDescription}}
+        <ion-card *ngFor="let day of plan.days" class="card">
+          <ion-card-title>
+            Giorno: {{day.weekDay}}
+            Settimana: {{day.week}} <br>
+          </ion-card-title>
+          <div *ngFor="let meal of day.meals">
+            <ion-label>
+              Pasto: {{meal.type}} <br>
+            </ion-label>
+            <ion-label *ngFor="let dish of meal.dishes" class="dish">
+              {{dish.title}}: {{dish.description}} <br>
+            </ion-label>
+          </div>
+        </ion-card>
+      </ion-card-content>
+    </ion-card>
+    <div *ngIf="auth.user">
+      <ion-button *ngIf="plan.owner === auth.user.sub" class="block" color="danger" (click)="deletePlan()">
+        <ion-icon name="trash"></ion-icon>
+        Elimina piano
+      </ion-button>
+      <ion-button *ngIf="plan.owner === auth.user.sub" class="block" color="primary" (click)="updatePlan()">
+        <ion-icon name="create"></ion-icon>
+        Aggiorna piano
+      </ion-button>
+    </div>
+  </ng-template>
 </ion-content>

@@ -1,6 +1,5 @@
 <form [formGroup]="planForm">
-
-  <!-- <ion-card class="generality"> -->
+  <ion-card>
     <ion-item>
       <ion-label color="medium" position="stacked">Titolo</ion-label>
       <ion-input color="primary" type="text" formControlName="title"></ion-input>
@@ -13,7 +12,6 @@
       <ion-label color="medium" position="stacked">Bevande</ion-label>
       <ion-textarea  color="primary" autoGrow="true" formControlName="drinkDescription"></ion-textarea>
     </ion-item>
-  <!-- </ion-card> -->
 
     <ion-button expand="block" fill="clear" color="primary" (click)="addWeek()">
       <ion-icon name="add"></ion-icon>
@@ -28,9 +26,7 @@
         Aggiungi Giorno
       </ion-button>
     </ion-item-divider>
-    <!-- <div *ngFor="let day of planForm.get('days')?.controls; let i = index"> -->
     <div *ngFor="let day of week.days?.controls; let i = index">
-      <!-- {{day.week.value}} -->
       <ng-template [ngIf]="!week.isDeleted(i)">
         <ion-item (click)="openDayModal(day)">
           <ion-label>
@@ -40,46 +36,6 @@
             <ion-icon name="trash"></ion-icon>
           </ion-button>
         </ion-item>
-      <!-- <div [formGroupName]="week.getAbsoluteIndex(i)">
-          <ion-card class="day">
-            <ion-item >
-              <ion-button (click)="deleteDay(week, i)" color="danger">
-                <ion-icon name="close"></ion-icon>
-              </ion-button>
-            </ion-item>
-          <ion-item> -->
-
-            <!-- change type to ion-select -->
-            <!-- <ion-select formControlName="weekDay">
-              <ion-select-option *ngFor="let weekDay of weekDays | enumToArray" value="{{weekDay}}">{{weekDays[weekDay]}}</ion-select-option>
-            </ion-select>
-          </ion-item> -->
-          <!-- <ion-item>
-            <ion-input type="number" formControlName="week" placeholder="Settimana n*"></ion-input>
-        </ion-item> -->
-        <!-- <div formArrayName="meals">
-          <div *ngFor="let meal of day.get('meals').controls; let j = index">
-            <div [formGroupName]="j">
-              <ion-grid>
-                <ion-row>
-                  <ion-col size="9">
-                    <ion-button expand="block" (click)="presentModal(meal)" color="primary" >{{mealTypes[meal.get('type').value]}}</ion-button>
-                  </ion-col>
-                  <ion-col >
-                    <ion-button (click)="deleteMeal(day.controls.meals, j)" color="danger"><ion-icon name="close"></ion-icon></ion-button> 
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-
-            </div> [formGroupName]="j" -->
-          <!-- </div>
-            <ion-button expand="block" (click)="addMeal(day.controls.meals)" color="secondary">
-              <ion-icon name="add" size=medium></ion-icon>
-              ADD MEAL
-            </ion-button>
-        </div>
-      </ion-card>
-      </div> -->
       </ng-template>
     </div>
   </div>
