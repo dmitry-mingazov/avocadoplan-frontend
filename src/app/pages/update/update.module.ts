@@ -8,7 +8,8 @@ import { UpdatePageRoutingModule } from './update-routing.module';
 
 import { UpdatePage } from './update.page';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ModalMealPage } from 'src/app/_modals/modal-meal/modal-meal.page';
+import { ModalDayPage } from 'src/app/_modals/modal-day/modal-day.page';
+import { ModalDayPageModule } from 'src/app/_modals/modal-day/modal-day.module';
 
 @NgModule({
   imports: [
@@ -16,9 +17,9 @@ import { ModalMealPage } from 'src/app/_modals/modal-meal/modal-meal.page';
     FormsModule,
     IonicModule,
     UpdatePageRoutingModule,
-    SharedModule
+    SharedModule,
+    ModalDayPageModule,
   ],
-  declarations: [UpdatePage],
-  entryComponents: [ ModalMealPage]
+  declarations: [UpdatePage]
 })
 export class UpdatePageModule {}

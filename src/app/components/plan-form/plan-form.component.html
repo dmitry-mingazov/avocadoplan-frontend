@@ -1,64 +1,90 @@
 <form [formGroup]="planForm">
 
-  <ion-card class="generality">
+  <!-- <ion-card class="generality"> -->
     <ion-item>
-      <ion-label position="floating">Title</ion-label>
-      <ion-input type="text" formControlName="title"></ion-input>
+      <ion-label color="medium" position="stacked">Titolo</ion-label>
+      <ion-input color="primary" type="text" formControlName="title"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Plan description</ion-label>
-      <ion-textarea formControlName="description"></ion-textarea>
+      <ion-label color="medium" position="stacked">Descrizione piano</ion-label>
+      <ion-textarea  color="primary" autoGrow="true" formControlName="description"></ion-textarea>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Drinks</ion-label>
-      <ion-textarea formControlName="drinkDescription"></ion-textarea>
+      <ion-label color="medium" position="stacked">Bevande</ion-label>
+      <ion-textarea  color="primary" autoGrow="true" formControlName="drinkDescription"></ion-textarea>
     </ion-item>
-  </ion-card>
+  <!-- </ion-card> -->
 
+    <ion-button expand="block" fill="clear" color="primary" (click)="addWeek()">
+      <ion-icon name="add"></ion-icon>
+      Aggiungi settimana
+    </ion-button>
   <div formArrayName="days">
-  <div *ngFor="let day of planForm.get('days')?.controls; let i = index">
-    <div [formGroupName]="i">
-        <ion-card class="day">
-          <ion-item >
-            <ion-button (click)="deleteDay(i)" color="danger">
-              <ion-icon name="close"></ion-icon>
-            </ion-button>
-          </ion-item>
-        <ion-item>
-          <!-- change type to ion-select -->
-          <ion-input type="number" formControlName="weekDay" placeholder="Giorno della settimana"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input type="number" formControlName="week" placeholder="Settimana n*"></ion-input>
-      </ion-item>
-      <div formArrayName="meals">
-        <div *ngFor="let meal of day.get('meals').controls; let j = index">
-          <div [formGroupName]="j">
-            <ion-grid>
-              <ion-row>
-                <ion-col size="9">
-                  <ion-button expand="block" (click)="presentModal(meal)" color="primary" >{{meal.get('type').value}}</ion-button>
-                </ion-col>
-                <ion-col >
-                  <ion-button (click)="deleteMeal(day.controls.meals, j)" color="danger"><ion-icon name="close"></ion-icon></ion-button> 
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-
-          </div> <!-- [formGroupName]="j" -->
-        </div>
-          <ion-button expand="block" (click)="addMeal(day.controls.meals)" color="secondary">
-            <ion-icon name="add" size=medium></ion-icon>
-            ADD MEAL
+  <div *ngFor="let week of weeks">
+    <ion-item-divider>
+      <ion-label>Settimana {{week.index + 1}}</ion-label>
+      <ion-button slot="end" color="primary" fill="clear" (click)="addDay(week)">
+        <ion-icon name="add"></ion-icon>
+        Aggiungi Giorno
+      </ion-button>
+    </ion-item-divider>
+    <!-- <div *ngFor="let day of planForm.get('days')?.controls; let i = index"> -->
+    <div *ngFor="let day of week.days?.controls; let i = index">
+      <!-- {{day.week.value}} -->
+      <ng-template [ngIf]="!week.isDeleted(i)">
+        <ion-item (click)="openDayModal(day)">
+          <ion-label>
+            {{weekDays[day.controls.weekDay.value]}}
+          </ion-label>
+          <ion-button color="danger" fill="clear" (click)="deleteDay(week, i)">
+            <ion-icon name="trash"></ion-icon>
           </ion-button>
-      </div>
-    </ion-card>
+        </ion-item>
+      <!-- <div [formGroupName]="week.getAbsoluteIndex(i)">
+          <ion-card class="day">
+            <ion-item >
+              <ion-button (click)="deleteDay(week, i)" color="danger">
+                <ion-icon name="close"></ion-icon>
+              </ion-button>
+            </ion-item>
+          <ion-item> -->
+
+            <!-- change type to ion-select -->
+            <!-- <ion-select formControlName="weekDay">
+              <ion-select-option *ngFor="let weekDay of weekDays | enumToArray" value="{{weekDay}}">{{weekDays[weekDay]}}</ion-select-option>
+            </ion-select>
+          </ion-item> -->
+          <!-- <ion-item>
+            <ion-input type="number" formControlName="week" placeholder="Settimana n*"></ion-input>
+        </ion-item> -->
+        <!-- <div formArrayName="meals">
+          <div *ngFor="let meal of day.get('meals').controls; let j = index">
+            <div [formGroupName]="j">
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="9">
+                    <ion-button expand="block" (click)="presentModal(meal)" color="primary" >{{mealTypes[meal.get('type').value]}}</ion-button>
+                  </ion-col>
+                  <ion-col >
+                    <ion-button (click)="deleteMeal(day.controls.meals, j)" color="danger"><ion-icon name="close"></ion-icon></ion-button> 
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+            </div> [formGroupName]="j" -->
+          <!-- </div>
+            <ion-button expand="block" (click)="addMeal(day.controls.meals)" color="secondary">
+              <ion-icon name="add" size=medium></ion-icon>
+              ADD MEAL
+            </ion-button>
+        </div>
+      </ion-card>
+      </div> -->
+      </ng-template>
     </div>
   </div>
 
-
-  <ion-button expand="block" color="primary" (click)="addDay()"><ion-icon name="add"></ion-icon>ADD DAY</ion-button>
-  <ion-button expand="block" color="secondary" (click)="submitForm()"><ion-icon name="arrow-up"></ion-icon>SUBMIT</ion-button>
+  <ion-button class="btn-submit" expand="block" color="primary" (click)="submitForm()"><ion-icon name="checkmark"></ion-icon>Salva</ion-button>
 </div>
 
 </form>

@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ModalMealPage } from './modal-meal.page';
+import { ModalDayPage } from './modal-day.page';
 
-describe('ModalMealPage', () => {
-  let component: ModalMealPage;
-  let fixture: ComponentFixture<ModalMealPage>;
+describe('ModalDayPage', () => {
+  let component: ModalDayPage;
+  let fixture: ComponentFixture<ModalDayPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalMealPage ],
+      declarations: [ ModalDayPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ModalMealPage);
+    fixture = TestBed.createComponent(ModalDayPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

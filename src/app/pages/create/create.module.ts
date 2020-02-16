@@ -9,10 +9,10 @@ import { CreatePageRoutingModule } from './create-routing.module';
 import { CreatePage } from './create.page';
 import { PipesModule } from 'src/app/_pipes/pipes/pipes.module';
 import { EnumToArrayPipe } from 'src/app/_pipes/enum-to-array.pipe';
-import { ModalMealPage } from 'src/app/_modals/modal-meal/modal-meal.page';
-import { ModalMealPageModule } from 'src/app/_modals/modal-meal/modal-meal.module';
 import { PlanFormComponent } from 'src/app/components/plan-form/plan-form.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ModalDayPage } from 'src/app/_modals/modal-day/modal-day.page';
+import { ModalDayPageModule } from 'src/app/_modals/modal-day/modal-day.module';
 
 @NgModule({
   imports: [
@@ -21,7 +21,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     IonicModule,
     CreatePageRoutingModule,
     ReactiveFormsModule,
-    ModalMealPageModule,
+    ModalDayPageModule,
     SharedModule
   ],
   declarations: [

@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar class="head" color="primary">
+      <ion-buttons slot="start" (click)="closeModal()">
+        <ion-button>
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="day">
+    <ion-item>
+      <ion-label>Giorno della settimana</ion-label>
+      <ion-select formControlName="weekDay" name="week">
+        <ion-select-option *ngFor="let weekDay of weekDays | enumToArray" value="{{weekDay}}">{{weekDays[weekDay]}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <div formArrayName="meals">
+      <ion-button expand="block" (click)="addMeal(day.controls.meals)" color="primary">
+        <ion-icon name="add"></ion-icon>
+        Aggiungi pasto
+      </ion-button>
+      <ion-card *ngFor="let meal of day.get('meals').controls; let j = index;">
+        <div [formGroupName]="j">
+            <ion-card-content>
+              <ion-item>
+                <ion-label >
+                  <h1>
+                  {{mealTypes[meal.controls.type.value]}}
+                  </h1>
+                </ion-label>
+                <ion-button color="danger" fill="clear" size="medium" (click)="deleteMeal(day.controls.meals, j)">
+                  <ion-icon name="close"></ion-icon>
+                </ion-button>
+              </ion-item>
+              <div formArrayName="dishes">
+                <ion-button expand="block" (click)="addDish(meal.controls.dishes)">
+                  <ion-icon name="add"></ion-icon>
+                  Aggiungi piatto
+                </ion-button>
+                <ion-card *ngFor="let dish of meal.get('dishes')?.controls; let k = index;">
+                  <ion-item>
+                    <ion-button (click)="deleteDish(meal.controls.dishes, k)" color="danger" fill="clear">
+                      <ion-icon name="close"></ion-icon>
+                    </ion-button>
+                  </ion-item>
+                  <div [formGroupName]="k">
+                    <ion-input type="text" formControlName="title" placeholder="Nome piatto"></ion-input>
+                    <ion-input type="text" formControlName="description" placeholder="Descrizione piatto"></ion-input>
+                  </div>
+                </ion-card>
+              </div>
+            </ion-card-content>
+        </div>
+      </ion-card>
+    </div>
+
+  </form>
+</ion-content>
+
