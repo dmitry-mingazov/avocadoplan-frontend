@@ -1,29 +1,3 @@
-.card{
-    background-color: var(--avocado-color-primary-contrast);
-    ion-card-title{
-        color: var(--avocado-color-primary);
-        font-weight: bold;
-        font-size: small;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    ion-card-content{
-    font-size: x-small;
-    padding: 0%;
-    :hover{
-        background-color: saturation($color: #fce198);
-    }
-    }
-}
-
-.author{
-    color: "primary";
-    font-size: x-small;
-    float: right;
-    size: small;
-}
-
 .dish{
     padding-left: 3%;
 }

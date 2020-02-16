@@ -17,15 +17,15 @@
       </ion-card-header>
       <ion-card-content>
         {{plan.description}} <br>
-        Drink: {{plan.drinkDescription}}
+        Bevande: {{plan.drinkDescription}}
         <ion-card *ngFor="let day of plan.days" class="card">
           <ion-card-title>
-            Day: {{day.weekDay}}
-            Week: {{day.week}} <br>
+            Giorno: {{day.weekDay}}
+            Settimana: {{day.week}} <br>
           </ion-card-title>
           <div *ngFor="let meal of day.meals">
             <ion-label>
-              Meal: {{meal.type}} <br>
+              Pasto: {{meal.type}} <br>
             </ion-label>
             <ion-label *ngFor="let dish of meal.dishes" class="dish">
               {{dish.title}}: {{dish.description}} <br>
@@ -37,11 +37,11 @@
     <div *ngIf="auth.user">
       <ion-button *ngIf="plan.owner === auth.user.sub" class="block" color="danger" (click)="deletePlan()">
         <ion-icon name="trash"></ion-icon>
-        DELETE PLAN
+        Elimina piano
       </ion-button>
       <ion-button *ngIf="plan.owner === auth.user.sub" class="block" color="primary" (click)="updatePlan()">
         <ion-icon name="create"></ion-icon>
-        Update Plan
+        Aggiorna piano
       </ion-button>
     </div>
   </ng-template>
