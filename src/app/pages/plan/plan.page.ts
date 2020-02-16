@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { PlanService } from 'src/app/services/plan.service';
 import { Plan } from 'src/app/_interfaces/plan.interface';
 import { AuthService } from 'src/app/services/auth.service';
+import { Day } from 'src/app/_interfaces/day.interface';
 
 @Component({
   selector: 'app-plan',
