@@ -17,6 +17,43 @@ export class PlanCardListComponent implements OnInit {
   private votedPlans: Map<string, number> = new Map<string, number>();
   private userFetched: boolean = false;
 
+  constructor(private auth: AuthService, private userService: UserService) {}
+
+  ngOnInit() {
+    if (this.plans$) {
+      this.plans$.subscribe(data => {
+        this.plans = data;
+        this.mapPlanVotes(this.auth.loggedIn);
+      });
+    }
+    this.auth.loggedIn$.subscribe(loggedIn => {
+      this.mapPlanVotes(loggedIn);
+    });
+  }
+
+  mapPlanVotes(loggedIn: boolean) {
+    if (loggedIn) {
+      this.userService.getUserById(this.auth.user.sub).subscribe(user => {
+        this.userFetched = true;
+        Object.keys(user.votes).forEach(_id => {
+          this.votedPlans.set(_id, user.votes[_id]);
+        });
+        this.mapPlans();
+      });
+    } else {
+      this.userFetched = false;
+      this.votedPlans.clear();
+      this.mapPlans();
+    }
+  }
+
+  doRefresh(event) {
+    this.plans$.subscribe(plans => {
+      this.mapPlans();
+      event.target.complete();
+    });
+  }
+
   private mapPlan = plan => {
     if (this.userFetched) {
       let vote = this.votedPlans.get(plan._id);
@@ -29,33 +66,9 @@ export class PlanCardListComponent implements OnInit {
     return plan;
   };
 
-  constructor(private auth: AuthService, private userService: UserService) {}
-
-  ngOnInit() {
-    if (this.plans$) {
-      this.plans$.subscribe(data => {
-        this.plans = data;
-      });
+  private mapPlans() {
+    if (this.plans != null) {
+      this.plans = this.plans.map<Plan>(this.mapPlan);
     }
-    this.auth.loggedIn$.subscribe(loggedIn => {
-      if (loggedIn) {
-        this.userService.getUserById(this.auth.user.sub).subscribe(user => {
-          this.userFetched = true;
-          Object.keys(user.votes).forEach(_id => {
-            this.votedPlans.set(_id, user.votes[_id]);
-          });
-          if (this.plans != null) {
-            this.plans.map<Plan>(this.mapPlan);
-          }
-        });
-      }
-    });
-  }
-
-  doRefresh(event) {
-    this.plans$.subscribe(plans => {
-      this.plans = plans.map<Plan>(this.mapPlan);
-      event.target.complete();
-    });
   }
 }
