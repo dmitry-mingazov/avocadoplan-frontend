@@ -46,7 +46,6 @@ export class PlanService {
   }
 
   public getHome(): Observable<Plan[]> {
-    console.log(this.baseUrl);
     this.homePlans$ = this.http.get<Plan[]>(this.baseUrl).pipe(
       tap(_ => this.helper.log("Home fetched")),
       catchError(this.helper.handleError<Plan[]>("getHome"))
@@ -55,7 +54,6 @@ export class PlanService {
   }
 
   public getUserPlans(_id: string): Observable<Plan[]> {
-    console.log(this.baseUrl);
     this.userPlans$ = this.http
       .get<Plan[]>(`${this.baseUrl}${this.ownedBy}/${_id}`)
       .pipe(
@@ -66,7 +64,6 @@ export class PlanService {
   }
 
   public getSavedPlans(_id: string): Observable<Plan[]> {
-    console.log(this.baseUrl);
     this.savedPlans$ = this.http
       .get<Plan[]>(`${this.baseUrl}${this.saved}`, this.helper.getAuthOptions())
       .pipe(

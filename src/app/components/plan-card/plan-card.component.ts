@@ -17,6 +17,8 @@ export class PlanCardComponent implements OnInit {
   UPVOTE = true;
   DOWNVOTE = false;
 
+  private saved: boolean = false;
+
   constructor(
     private planService: PlanService,
     private navCtrl: NavController,
@@ -25,6 +27,10 @@ export class PlanCardComponent implements OnInit {
 
   ngOnInit() {}
 
+  savePlan() {
+    this.planService.savePlan(this.plan._id);
+  }
+  
   openPlan(plan: Plan) {
     this.navCtrl.navigateForward(`plan/${plan._id}`);
   }

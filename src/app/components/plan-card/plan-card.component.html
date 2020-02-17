@@ -21,6 +21,9 @@
       <ion-button color="{{plan.downvoted ? 'primary' : 'medium'}}" (click)="votePlan(plan, DOWNVOTE)">
         <ion-icon name="arrow-round-down"></ion-icon>
       </ion-button>
+      <ion-button slot="end" color="medium" (click)="savePlan()">
+        <ion-icon name="bookmark" ></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-footer>
 </ion-card>

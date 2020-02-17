@@ -20,10 +20,17 @@ export class HomePage implements OnInit {
   constructor(private planService: PlanService) {}
 
   ngOnInit() {
-    this.refreshHome(null);
+    this.getHome();
   }
 
   refreshHome(event) {
+    this.planService.getHome().subscribe((plan) => {
+      this.planSub.next(plan);
+      event.target.complete();
+    })
+  }
+
+  getHome() {
     this.planService.getHome().subscribe((plan) => {
       this.planSub.next(plan);
     })

@@ -4,6 +4,7 @@ import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
 import { PlanService } from "src/app/services/plan.service";
 import { Observable } from "rxjs";
+import { IonRefresher, Events } from '@ionic/angular';
 @Component({
   selector: "app-plan-card-list",
   templateUrl: "./plan-card-list.component.html",
@@ -12,7 +13,7 @@ import { Observable } from "rxjs";
 export class PlanCardListComponent implements OnInit {
   @Input() plans$: Observable<Plan[]>;
 
-  @Output() refresh?: EventEmitter<boolean> = new EventEmitter();
+  @Output() refresh?: EventEmitter<any> = new EventEmitter();
 
   private plans: Plan[] = null;
   private votedPlans: Map<string, number> = new Map<string, number>();
@@ -52,8 +53,10 @@ export class PlanCardListComponent implements OnInit {
   }
 
   doRefresh(event) {
-    this.refresh.emit(true);
-    event.target.complete();
+    this.refresh.emit(event);
+    setTimeout(() => {
+      event.target.complete();
+    }, 3000);
   }
 
   private mapPlan = plan => {
