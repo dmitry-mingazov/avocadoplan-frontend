@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadChildren: () => import('./pages/create/create.module').then(m => m.CreatePageModule)
   },
   {
@@ -26,13 +26,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/user/user.module').then( m => m.UserPageModule)
   },
   {
-    path: 'modal-meal',
-    loadChildren: () => import('./_modals/modal-meal/modal-meal.module').then( m => m.ModalMealPageModule)
-  },
-  {
     path: 'update/:id',
     loadChildren: () => import('./pages/update/update.module').then( m => m.UpdatePageModule)
   },
+  {
+    path: 'modal-day',
+    loadChildren: () => import('./_modals/modal-day/modal-day.module').then( m => m.ModalDayPageModule)
+  },
+
 
 
 

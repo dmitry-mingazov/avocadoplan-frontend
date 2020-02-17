@@ -15,7 +15,7 @@ export class DayForm {
         this.weekDay.setValue(day.weekDay);
         this.weekDay.setValidators([Validators.required]);
 
-        this.week.setValue(day.week);
+        this.week.setValue(day.week, {onlySelf: true});
         this.week.setValidators([Validators.required]);
 
         if(day.meals != null && day.meals != undefined){

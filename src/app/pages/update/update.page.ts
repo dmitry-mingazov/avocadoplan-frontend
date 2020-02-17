@@ -27,6 +27,7 @@ export class UpdatePage implements OnInit {
   getPlan() {
     this.planService.getPlanById(this._id).subscribe( (data) => {
       this.plan = data;
+      console.log(this.plan);
     })
   }
 

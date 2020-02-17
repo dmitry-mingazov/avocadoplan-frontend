@@ -4,16 +4,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ModalMealPageRoutingModule } from './modal-meal-routing.module';
+import { ModalDayPageRoutingModule } from './modal-day-routing.module';
 
+import { ModalDayPage } from './modal-day.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ModalMealPageRoutingModule,
+    ModalDayPageRoutingModule,
     ReactiveFormsModule
   ]
 })
-export class ModalMealPageModule {}
+export class ModalDayPageModule {}
