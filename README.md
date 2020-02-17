@@ -4,8 +4,8 @@ L'applicazione permette agli utenti iscritti alla piattaforma di poter creare, c
 * una maggiore organizzazione delle proprie abitudini alimentari
 * l'inserimento nella propria dieta di piani adatti alle proprie esigenze
 * di scoprire nuovi pasti, anche di diversa natura etnica
-* di filtrare le ricerche attraverso delle etichette
 * di ottenere un feedback riguardo i propri piani
+* di estrarre il pdf dei piani alimentari
 
 ## Tecnologie utilizzate
 Il lato frontend dell'applicazione è stato sviluppato utilizzando **Ionic** per l'interfaccia utente, **Angular** per la costruzione dell'architettura e **Cordova** per l'utilizzo delle funzionalità native dei dispositivi mobili.
