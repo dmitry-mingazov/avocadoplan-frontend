@@ -63,7 +63,7 @@ export class PlanService {
     return this.userPlans$;
   }
 
-  public getSavedPlans(_id: string): Observable<Plan[]> {
+  public getSavedPlans(): Observable<Plan[]> {
     this.savedPlans$ = this.http
       .get<Plan[]>(`${this.baseUrl}${this.saved}`, this.helper.getAuthOptions())
       .pipe(

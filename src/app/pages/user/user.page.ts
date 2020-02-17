@@ -12,22 +12,46 @@ import { Observable, BehaviorSubject } from "rxjs";
 })
 export class UserPage implements OnInit {
   private savedPlansSub: BehaviorSubject<Plan[]> = new BehaviorSubject(null);
+  private ownedPlansSub: BehaviorSubject<Plan[]> = new BehaviorSubject(null);
   private userPlans$: Observable<Plan[]> = null;
-  private savedPlans$: Observable<Plan[]> = this.savedPlansSub.asObservable();
-
+  private savedPlans$: Observable<Plan[]> = null;
 
   constructor(private planService: PlanService, private auth: AuthService) {}
 
   ngOnInit() {
     this.auth.loggedIn$.subscribe(loggedIn => {
       if (loggedIn) {
-        // this.userPlans$ = this.planService.getUserPlans(this.auth.user.sub);
-        this.planService.getSavedPlans(this.auth.user.sub).subscribe((plans) => {
-          this.savedPlansSub.next(plans);
-        });
+        this.userPlans$ = this.planService.getUserPlans(this.auth.user.sub);
+        this.getSavedPlans();
+        this.savedPlans$ = this.planService.getSavedPlans();
+        this.getOwnedPlans();
       }
     });
   }
 
+  getSavedPlans() {
+    this.planService.getSavedPlans().subscribe(plan => {
+      this.savedPlansSub.next(plan);
+    });
+  }
 
+  getOwnedPlans() {
+    this.planService.getUserPlans(this.auth.user.sub).subscribe(plan => {
+      this.ownedPlansSub.next(plan);
+    });
+  }
+
+  refreshSaved(event) {
+    this.savedPlans$.subscribe(plan => {
+      this.savedPlansSub.next(plan);
+      event.target.complete();
+    });
+  }
+
+  refreshOwned(event) {
+    this.userPlans$.subscribe(plan => {
+      this.ownedPlansSub.next(plan);
+      event.target.complete();
+    });
+  }
 }

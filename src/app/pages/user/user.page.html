@@ -25,11 +25,11 @@
       <ion-slides class="user-plan-list">
         <ion-slide>
           <ion-item>
-            <app-plan-card-list [plans$]="userPlans$"></app-plan-card-list>
+            <app-plan-card-list [plans$]="userPlans$" (refresh)="refreshOwned($event)"></app-plan-card-list>
           </ion-item>
         </ion-slide>
         <ion-slide>
-          <app-plan-card-list [plans$]="savedPlans$"></app-plan-card-list>
+          <app-plan-card-list [plans$]="savedPlans$" (refresh)="refreshSaved($event)"></app-plan-card-list>
         </ion-slide>
       </ion-slides>
     </ng-template>

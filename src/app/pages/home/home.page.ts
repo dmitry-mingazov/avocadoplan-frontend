@@ -24,15 +24,15 @@ export class HomePage implements OnInit {
   }
 
   refreshHome(event) {
-    this.planService.getHome().subscribe((plan) => {
+    this.planService.getHome().subscribe(plan => {
       this.planSub.next(plan);
       event.target.complete();
-    })
+    });
   }
 
   getHome() {
-    this.planService.getHome().subscribe((plan) => {
+    this.planService.getHome().subscribe(plan => {
       this.planSub.next(plan);
-    })
+    });
   }
 }
