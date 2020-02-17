@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { EnumToArrayPipe } from "../_pipes/enum-to-array.pipe";
 import { PlanCardComponent } from "../components/plan-card/plan-card.component";
 import { ModalDayPage } from '../_modals/modal-day/modal-day.page';
+import { PlanCardListComponent } from "../components/plan-card-list/plan-card-list.component";
 
 @NgModule({
   imports: [CommonModule, IonicModule, ReactiveFormsModule],
@@ -13,13 +14,17 @@ import { ModalDayPage } from '../_modals/modal-day/modal-day.page';
     PlanFormComponent,
     PlanCardComponent,
     EnumToArrayPipe,
-    ModalDayPage
+    ModalDayPage,
+    PlanCardListComponent,
+    EnumToArrayPipe
   ],
   exports: [
     PlanFormComponent,
     PlanCardComponent,
     EnumToArrayPipe,
-    ModalDayPage
+    ModalDayPage,
+    PlanCardListComponent,
+    EnumToArrayPipe
   ]
 })
 export class SharedModule {}

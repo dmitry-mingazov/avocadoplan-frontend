@@ -10,16 +10,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
-      refreshingText="Refreshing...">
-    </ion-refresher-content>
-  </ion-refresher>
   <p *ngIf="loading" class="ion-text-center">Loading home...</p>
-  <!-- <pre *ngIf="votedPlans">{{votedPlans.keys()}}</pre> -->
   <!-- START plan item card -->
-  <ng-template [ngIf]="plans">
-    <app-plan-card *ngFor="let plan of plans" [plan]="plan" [votedPlans]="votedPlans"></app-plan-card>
-  </ng-template>
+  <app-plan-card-list [plans$]="plans$"></app-plan-card-list>
   <!-- END Plan item card -->
 </ion-content>

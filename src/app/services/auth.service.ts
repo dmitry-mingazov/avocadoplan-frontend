@@ -29,16 +29,17 @@ export class AuthService {
     private storage: Storage,
     private safariViewController: SafariViewController
   ) {
-    this.storage.clear();
-    this.storage.get('profile').then(user => this.user = user);
-    this.storage.get('access_token').then(token => this.accessToken = token);
-    this.storage.get('expires_at').then(exp => {
-      this.loggedInSub.next(Date.now() < JSON.parse(exp));
-      this.loading = false;
-    });
-    this.loggedIn$.subscribe( (loggedIn) => {
-      this.loggedIn = loggedIn;
-    })
+    // this.storage.clear();
+    // this.storage.get('profile').then(user => this.user = user);
+    // this.storage.get('access_token').then(token => this.accessToken = token);
+    // this.storage.get('expires_at').then(exp => {
+    //   this.loggedInSub.next(Date.now() < JSON.parse(exp));
+    //   this.loading = false;
+    // });
+    // this.loggedIn$.subscribe( (loggedIn) => {
+    //   this.loggedIn = loggedIn;
+    // })
+    this.login();
   }
 
   login() {

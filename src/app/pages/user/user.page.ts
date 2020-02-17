@@ -1,5 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
+import { PlanService } from "src/app/services/plan.service";
+import { Plan } from "src/app/_interfaces/plan.interface";
+import { UserService } from "src/app/services/user.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-user",
@@ -7,14 +11,17 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ["./user.page.scss"]
 })
 export class UserPage implements OnInit {
-  token: string;
+  private userPlans$: Observable<Plan[]> = null;
+  private savedPlans$: Observable<Plan[]> = null;
 
-  constructor(private auth: AuthService) {}
+  constructor(private planService: PlanService, private auth: AuthService) {}
 
-  ngOnInit() {}
-
-  showToken() {
-    this.token = this.auth.accessToken;
-    console.log(this.token);
+  ngOnInit() {
+    this.auth.loggedIn$.subscribe(loggedIn => {
+      if (loggedIn) {
+        this.userPlans$ = this.planService.getUserPlans(this.auth.user.sub);
+        this.savedPlans$ = this.planService.getSavedPlans(this.auth.user.sub);
+      }
+    });
   }
 }
