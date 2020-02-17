@@ -6,7 +6,7 @@ import { PlanPageModule } from "../plan/plan.module";
 import { NavController } from "@ionic/angular";
 import { UserService } from "src/app/services/user.service";
 import { User } from "src/app/_interfaces/user.interface";
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 
 @Component({
   selector: "app-home",
@@ -14,9 +14,18 @@ import { Observable } from "rxjs";
   styleUrls: ["home.page.scss"]
 })
 export class HomePage implements OnInit {
-  private plans$: Observable<Plan[]> = this.planService.getHome();
+  private planSub: BehaviorSubject<Plan[]> = new BehaviorSubject(null);
+  private plans$: Observable<Plan[]> = this.planSub.asObservable();
 
   constructor(private planService: PlanService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.refreshHome(null);
+  }
+
+  refreshHome(event) {
+    this.planService.getHome().subscribe((plan) => {
+      this.planSub.next(plan);
+    })
+  }
 }

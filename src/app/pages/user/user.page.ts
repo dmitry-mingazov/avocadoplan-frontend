@@ -19,7 +19,7 @@ export class UserPage implements OnInit {
   ngOnInit() {
     this.auth.loggedIn$.subscribe(loggedIn => {
       if (loggedIn) {
-        this.userPlans$ = this.planService.getUserPlans(this.auth.user.sub);
+        // this.userPlans$ = this.planService.getUserPlans(this.auth.user.sub);
         this.savedPlans$ = this.planService.getSavedPlans(this.auth.user.sub);
       }
     });

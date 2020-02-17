@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Plan</ion-title>
+    <ion-title>Piano</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -20,12 +20,12 @@
         Bevande: {{plan.drinkDescription}}
         <ion-card *ngFor="let day of plan.days" class="card">
           <ion-card-title>
-            Giorno: {{day.weekDay}}
-            Settimana: {{day.week}} <br>
+            Giorno: {{weekDays[day.weekDay]}}
+            Settimana: {{day.week + 1}} <br>
           </ion-card-title>
           <div *ngFor="let meal of day.meals">
             <ion-label>
-              Pasto: {{meal.type}} <br>
+              Pasto: {{mealTypes[meal.type]}} <br>
             </ion-label>
             <ion-label *ngFor="let dish of meal.dishes" class="dish">
               {{dish.title}}: {{dish.description}} <br>

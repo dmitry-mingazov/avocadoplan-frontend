@@ -4,6 +4,7 @@ import { NavController } from "@ionic/angular";
 import { PlanService } from "src/app/services/plan.service";
 import { Plan } from "src/app/_interfaces/plan.interface";
 import { AuthService } from "src/app/services/auth.service";
+import { WEEK_DAY, MEAL_TYPE } from '../../shared/const-obj';
 
 @Component({
   selector: "app-plan",
@@ -13,6 +14,9 @@ import { AuthService } from "src/app/services/auth.service";
 export class PlanPage implements OnInit {
   _id: string;
   private plan: Plan;
+
+  private weekDays = WEEK_DAY;
+  private mealTypes = MEAL_TYPE;
 
   constructor(
     private route: ActivatedRoute,

@@ -1,17 +1,12 @@
 <ion-header>
   <ion-toolbar class="head" color="primary">
     <ion-title>AvocadoPlan</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="search()">
-        <ion-icon name="search" size=medium></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <p *ngIf="loading" class="ion-text-center">Loading home...</p>
   <!-- START plan item card -->
-  <app-plan-card-list [plans$]="plans$"></app-plan-card-list>
+  <app-plan-card-list [plans$]="plans$" (refresh)="refreshHome($event)"></app-plan-card-list>
   <!-- END Plan item card -->
 </ion-content>

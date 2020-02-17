@@ -26,7 +26,6 @@ export class CreatePage implements OnInit {
 
   submitPlan(event) {
     this.createPlan(event);
-
   }
 
 }

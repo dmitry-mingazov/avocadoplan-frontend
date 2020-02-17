@@ -1,10 +1,9 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import { Plan } from "src/app/_interfaces/plan.interface";
 import { UserService } from "src/app/services/user.service";
 import { AuthService } from "src/app/services/auth.service";
 import { PlanService } from "src/app/services/plan.service";
 import { Observable } from "rxjs";
-
 @Component({
   selector: "app-plan-card-list",
   templateUrl: "./plan-card-list.component.html",
@@ -13,11 +12,16 @@ import { Observable } from "rxjs";
 export class PlanCardListComponent implements OnInit {
   @Input() plans$: Observable<Plan[]>;
 
+  @Output() refresh?: EventEmitter<boolean> = new EventEmitter();
+
   private plans: Plan[] = null;
   private votedPlans: Map<string, number> = new Map<string, number>();
   private userFetched: boolean = false;
 
-  constructor(private auth: AuthService, private userService: UserService) {}
+  constructor(
+    private auth: AuthService, 
+    private userService: UserService,
+    private planService: PlanService) {}
 
   ngOnInit() {
     if (this.plans$) {
@@ -48,10 +52,8 @@ export class PlanCardListComponent implements OnInit {
   }
 
   doRefresh(event) {
-    this.plans$.subscribe(plans => {
-      this.mapPlans();
-      event.target.complete();
-    });
+    this.refresh.emit(true);
+    event.target.complete();
   }
 
   private mapPlan = plan => {
